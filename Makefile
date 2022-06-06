@@ -8,7 +8,7 @@ test-unit:
 
 .PHONY: test-e2e
 test-e2e: dev-setup
-	npm run test:e2e
+	npm run test:e2e && make dev-teardown
 
 .PHONY: dev-setup
 dev-setup:
