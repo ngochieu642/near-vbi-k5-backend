@@ -6,7 +6,6 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "prepare": "husky install && chmod ug+x .husky/*",
     "prebuild": "rimraf dist",
     "build": "nest build",
     "build:watch": "nest build -w",
@@ -56,7 +55,6 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "fs": "0.0.1-security",
-    "husky": "^8.0.1",
     "jest": "^28.1.0",
     "lint-staged": "^11.2.6",
     "prettier": "^2.6.2",
