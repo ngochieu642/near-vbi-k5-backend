@@ -17,7 +17,7 @@ import { User } from './v1/users/users.entity';
       port: 54320,
       username: 'dev',
       password: '1234',
-      database: 'demo-db',
+      database: 'identity_app',
       entities: [User],
       synchronize: true,
     }),

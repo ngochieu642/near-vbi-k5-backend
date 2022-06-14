@@ -6,9 +6,10 @@ services:
     environment:
       POSTGRES_USER: dev
       POSTGRES_PASSWORD: 1234
-      PGDATA: /data/postgres
+      POSTGRES_DB: identity_app
     volumes:
-      - near-postgres-volume:/data/postgres
+      - near-postgres-volume:/var/lib/postgresql/data
+      - "${PWD}/sql:/docker-entrypoint-initdb.d"
     ports:
       - "54320:5432"
     networks:
