@@ -6,6 +6,7 @@ services:
     environment:
       POSTGRES_USER: dev
       POSTGRES_PASSWORD: 1234
+      PGDATA: /data/postgres
     volumes:
       - near-postgres-volume:/data/postgres
     ports:
