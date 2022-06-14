@@ -1,0 +1,104 @@
+{
+  "name": "demo-project-messages",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "nest build",
+    "build:watch": "nest build -w",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "test:unit": "jest --config ./test/unit/jest.json --detectOpenHandles --forceExit",
+    "test:unit:watch": "jest --config ./test/unit/jest.json --detectOpenHandles --forceExit --watch",
+    "test:e2e": "jest --config ./test/e2e/jest-e2e.json --detectOpenHandles --forceExit",
+    "test:e2e:watch": "jest --config ./test/e2e/jest-e2e.json --detectOpenHandles --forceExit --watch",
+    "test:all": "jest --config ./jest.config.js --detectOpenHandles --forceExit",
+    "test:all:watch": "jest --config ./jest.config.js --detectOpenHandles --forceExit --watch",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
+  },
+  "dependencies": {
+    "@automapper/classes": "^8.3.6",
+    "@automapper/core": "^8.3.6",
+    "@automapper/nestjs": "^8.3.6",
+    "@automapper/pojos": "^8.3.6",
+    "@nestjs/common": "^8.4.4",
+    "@nestjs/core": "^8.4.4",
+    "@nestjs/mongoose": "^9.0.3",
+    "@nestjs/platform-express": "^8.4.4",
+    "module-alias": "^2.2.2",
+    "mongoose": "^6.3.2",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
+    "rxjs": "^7.5.5"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^16.2.4",
+    "@commitlint/config-conventional": "^16.2.4",
+    "@nestjs/cli": "^8.2.5",
+    "@nestjs/schematics": "^8.0.11",
+    "@nestjs/testing": "^8.4.4",
+    "@types/express": "^4.17.13",
+    "@types/jest": "27.5.0",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^17.0.31",
+    "@types/supertest": "^2.0.12",
+    "@typescript-eslint/eslint-plugin": "^5.22.0",
+    "@typescript-eslint/parser": "^5.22.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "fs": "0.0.1-security",
+    "jest": "^28.1.0",
+    "lint-staged": "^11.2.6",
+    "prettier": "^2.6.2",
+    "source-map-support": "^0.5.21",
+    "supertest": "^6.2.3",
+    "ts-jest": "^28.0.2",
+    "ts-loader": "^9.3.0",
+    "ts-node": "^10.7.0",
+    "tsconfig-paths": "^4.0.0",
+    "typescript": "^4.6.4",
+    "yargs": "^17.5.1"
+  },
+  "_moduleAliases": {
+    "@root": "."
+  },
+  "jest": {
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "roots": [
+      "src"
+    ],
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "moduleNameMapper": {
+      "src/(.*)": "<rootDir>/src/$1"
+    },
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
+    ]
+  }
+}
