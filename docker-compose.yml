@@ -1,0 +1,27 @@
+version: "3"
+services:
+  db:
+    image: postgres:14.3
+    container_name: near-vbi-k5-db
+    environment:
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: 1234
+    volumes:
+      - near-postgres-volume:/data/postgres
+    ports:
+      - "54320:5432"
+    networks:
+      - dev-network
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "1k"
+
+networks:
+  dev-network:
+    driver: bridge
+
+volumes:
+  near-postgres-volume:
+    driver: local
