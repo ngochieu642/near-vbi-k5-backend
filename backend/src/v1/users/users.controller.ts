@@ -2,7 +2,6 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { CreateUserDto } from './dtos/CreateUserDto';
 import { UsersService } from './users.service';
 import { CreateIdentityRequestDto } from './dtos/CreateIdentityRequestDto';
-import { validate } from 'class-validator';
 
 @Controller('users')
 export class UsersController {

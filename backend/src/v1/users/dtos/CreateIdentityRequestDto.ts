@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import { IsArray, IsISO8601, IsString } from 'class-validator';
 
 export class CreateIdentityRequestDto {
@@ -29,5 +30,6 @@ export class CreateIdentityRequestDto {
   nationality: string;
 
   @IsArray({ each: true })
+  @Type(() => Array)
   faceVector: string;
 }
