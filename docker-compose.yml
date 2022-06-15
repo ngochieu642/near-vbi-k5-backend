@@ -4,25 +4,19 @@ services:
     image: postgres:14.3
     container_name: near-vbi-k5-db
     environment:
-      POSTGRES_USER: dev
-      POSTGRES_PASSWORD: 1234
-      POSTGRES_DB: identity_app
+      - "TZ=Europe/Amsterdam"
+      - "POSTGRES_USER=docker"
+      - "POSTGRES_PASSWORD=docker"
     volumes:
       - near-postgres-volume:/var/lib/postgresql/data
       - "${PWD}/sql:/docker-entrypoint-initdb.d"
     ports:
       - "54320:5432"
-    networks:
-      - dev-network
     logging:
       driver: "json-file"
       options:
         max-file: "1"
         max-size: "1k"
-
-networks:
-  dev-network:
-    driver: bridge
 
 volumes:
   near-postgres-volume:

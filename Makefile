@@ -4,4 +4,4 @@ dev-setup:
 
 .PHONY: dev-teardown
 dev-teardown:
-	docker-compose down
+	docker-compose down -v
