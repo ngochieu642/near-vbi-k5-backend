@@ -2,7 +2,7 @@ import {HttpAdapterHost, NestFactory} from '@nestjs/core';
 import {Logger} from '@nestjs/common';
 import {AppModule} from './app.module';
 import {V1Constants} from './v1/V1Constants';
-import {AllExceptionsFilter} from "./v1/nest-utils/all-exceptions.filter";
+import {AllExceptionsFilter} from "./framework-utils/all-exceptions.filter";
 
 const logger = new Logger('main');
 

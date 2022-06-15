@@ -1,5 +1,5 @@
 import { AfterInsert, AfterRemove, AfterUpdate, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { FaceVector, Gender, IdentityRequestStatus, Nationality } from '../shared/type';
+import { FaceVector, Gender, IdentityRequestStatus, Nationality } from '../../shared/type';
 import { User } from '../users/users.entity';
 
 @Entity()

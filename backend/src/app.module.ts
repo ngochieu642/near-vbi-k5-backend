@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AutomapperModule } from '@automapper/nestjs';
 import { classes } from '@automapper/classes';
-import { AutomapperUserProfile } from './v1/shared/AutomapperUserProfile';
+import { AutomapperUserProfile } from './shared/AutomapperUserProfile';
 import { UsersModule } from './v1/users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './v1/users/users.entity';
