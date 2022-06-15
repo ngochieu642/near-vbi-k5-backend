@@ -1,7 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../../src/app.module';
+import { appExtensions } from '../../src/main';
 
 describe('User Controller (e2e)', () => {
   let app: INestApplication;
@@ -12,29 +13,38 @@ describe('User Controller (e2e)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
-    app.useGlobalPipes(
-      new ValidationPipe({
-        whitelist: true,
-      }),
-    );
+    appExtensions(app);
     await app.init();
   });
 
   describe('POST /users/identity-request', () => {
-    test('should return 400 if body has at least 1 field not match class validator', () => {
-      const body = {
-        accountId: 'ngochieu642.testnet',
-        userPublicKey: 'ed25519:GEY8FE8xVHnzmRv5k5e24VUncnqFrwDFGJSA11mGRiVo',
-        name: 'Hiếu Thái',
-        gender: 'male',
-        dob: '1997-04-10',
-        address: '688 Lê Đức Thọ',
-        ccid: '026647335',
-        phoneNumber: '0968046516',
-        nationality: 'Vietnam',
-        faceVector: [1],
-      };
+    const baseBody = {
+      accountId: 'ngochieu642.testnet',
+      userPublicKey: 'ed25519:GEY8FE8xVHnzmRv5k5e24VUncnqFrwDFGJSA11mGRiVo',
+      name: 'Hiếu Thái',
+      gender: 'male',
+      dob: '1997-04-10',
+      address: '688 Lê Đức Thọ',
+      ccid: '026647335',
+      phoneNumber: '0968046516',
+      nationality: 'Vietnam',
+      faceVector: [
+        [1, 2],
+        [3, 4],
+      ],
+    };
 
+    test.each([
+      { body: { ...baseBody, accountId: 123 } },
+      { body: { ...baseBody, userPublicKey: 123 } },
+      { body: { ...baseBody, name: 123 } },
+      { body: { ...baseBody, gender: 123 } },
+      { body: { ...baseBody, dob: '12/04/1997' } },
+      { body: { ...baseBody, dob: 12 } },
+      { body: { ...baseBody, phoneNumber: 12 } },
+      { body: { ...baseBody, nationality: 12 } },
+      { body: { ...baseBody, faceVector: [1] } },
+    ])('should return 400 if body has at least 1 field not match class validator', ({ body }) => {
       return request(app.getHttpServer())
         .post('/users/identity-request')
         .send(body)
