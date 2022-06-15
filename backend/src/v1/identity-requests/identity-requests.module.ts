@@ -8,5 +8,6 @@ import { IdentityRequest } from './identity-requests.entity';
   imports: [TypeOrmModule.forFeature([IdentityRequest])],
   controllers: [IdentityRequestsController],
   providers: [IdentityRequestsService],
+  exports: [IdentityRequestsService],
 })
 export class IdentityRequestsModule {}

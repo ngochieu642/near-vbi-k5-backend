@@ -16,7 +16,7 @@ export class CreateIdentityRequestDto {
 
   @IsString()
   @IsNotEmpty()
-  gender: string;
+  gender: 'male' | 'female';
 
   @IsISO8601()
   @IsNotEmpty()
@@ -36,7 +36,7 @@ export class CreateIdentityRequestDto {
 
   @IsString()
   @IsNotEmpty()
-  nationality: string;
+  nationality: 'Vietnam';
 
   @IsNotEmpty()
   @IsArray({ each: true })

@@ -2,6 +2,7 @@ import { AfterInsert, AfterRemove, AfterUpdate, Column, Entity, ManyToOne, Prima
 import { Gender, IdentityRequestStatus, Nationality } from '../../shared/type';
 import { User } from '../users/users.entity';
 import { Verifier } from '../verifiers/verifiers.entity';
+import { IsIn } from 'class-validator';
 
 @Entity()
 export class IdentityRequest {
@@ -18,6 +19,7 @@ export class IdentityRequest {
   name: string;
 
   @Column()
+  @IsIn(['male', 'female'])
   gender: Gender;
 
   @Column()
