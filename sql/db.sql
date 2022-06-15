@@ -10,5 +10,5 @@ SET row_security = off;
 SET default_tablespace = '';
 SET default_with_oids = false;
 
-DROP DATABASE IF EXISTS demo_db;
-CREATE DATABASE demo_db;
+DROP DATABASE IF EXISTS identity_app;
+CREATE DATABASE identity_app;
