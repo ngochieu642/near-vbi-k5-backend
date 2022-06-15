@@ -13,7 +13,8 @@ const HomeForm: React.FC = () => {
         onReset,
         onFill,
         sex_options,
-        phone_options
+        phone_options,
+        isDisableSubmit
     } = useHomeForm(form);
 
     const prefixSelector = (
@@ -58,7 +59,7 @@ const HomeForm: React.FC = () => {
                 <Button htmlType="button" onClick={onReset}>
                     Reset
                 </Button>
-                <Button className="ml-3" type="primary" htmlType="submit">
+                <Button className="ml-3" disabled={isDisableSubmit()} type="primary" htmlType="submit">
                     Submit
                 </Button>
             </Form.Item>

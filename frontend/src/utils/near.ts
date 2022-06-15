@@ -3,6 +3,7 @@ import {functionCall} from 'near-api-js/lib/transaction';
 import BN from 'bn.js';
 import getConfig from './config';
 import SpecialWallet from "~utils/SpecialWallet";
+import { LOCAL_STORAGE_ACCOUNT_WALLET_ID, LOCAL_STORAGE_IS_CONNECT_WALLET, LOCAL_STORAGE_PUBLIC_KEY } from '~common/constants';
 
 const env: string = process.env.NEAR_ENV || "development";
 export const config: any = getConfig(env);
@@ -159,4 +160,20 @@ export const toReadableNumberString = (
 
 export function formatNumber(num: number) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+}
+
+export const getPublicKey = async () => {
+    const isLogin = wallet.isSignedIn();
+    if (isLogin) {
+        const accountId = wallet.account().accountId;
+        const connection = wallet.account().connection;
+        const publicKey = await connection.signer.getPublicKey(
+            accountId,
+            connection.networkId
+        );
+        localStorage.setItem(LOCAL_STORAGE_PUBLIC_KEY, publicKey.toString());
+        localStorage.setItem(LOCAL_STORAGE_IS_CONNECT_WALLET, isLogin + "");
+        localStorage.setItem(LOCAL_STORAGE_ACCOUNT_WALLET_ID, accountId);
+        return publicKey;
+    }
 }

@@ -38,9 +38,9 @@ const LoginModal = () => {
                 onCancel={handleCancel}
                 footer={null}
             >
-                {/*<LoginForm/>*/}
+                <LoginForm />
                 {/*<SignUpForm/>*/}
-                <ForgotPassForm/>
+                {/*<ForgotPassForm/>*/}
             </Modal>
         </>
     );

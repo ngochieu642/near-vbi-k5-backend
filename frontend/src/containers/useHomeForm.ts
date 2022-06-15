@@ -1,4 +1,5 @@
-import {FormInstance} from 'antd'
+import {FormInstance, notification} from 'antd'
+import {wallet} from '~utils/near'
 
 export const useHomeForm = (form: FormInstance) => {
     const sex_options = [
@@ -12,11 +13,22 @@ export const useHomeForm = (form: FormInstance) => {
         {label: '+87', value: '87'},
     ];
 
+    type NotificationType = 'success' | 'info' | 'warning' | 'error';
+
+    const openNotificationWithIcon = (type: NotificationType, message: String = "") => {
+        notification[type]({
+            message
+        });
+    };
+
+    const isDisableSubmit = () => {
+        return !wallet.isSignedIn();
+    }
+
 
     const onFinish = (values: string) => {
         console.log(values);
     };
-
 
 
     const onReset = () => {
@@ -59,6 +71,7 @@ export const useHomeForm = (form: FormInstance) => {
         onFinish,
         onGenderChange,
         sex_options,
-        phone_options
+        phone_options,
+        isDisableSubmit
     }
 }
