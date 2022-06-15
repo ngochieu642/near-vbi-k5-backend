@@ -14,7 +14,7 @@ export class IdentityRequestsService {
       userPublicKey: dto.userPublicKey,
       name: dto.name,
       gender: dto.gender,
-      dob: Date.parse(dto.dob),
+      dob: new Date(dto.dob),
       address: dto.address,
       ccid: dto.ccid,
       phoneNumber: dto.phoneNumber,
