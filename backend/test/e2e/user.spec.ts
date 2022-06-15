@@ -4,6 +4,8 @@ import * as request from 'supertest';
 import { AppModule } from '../../src/app.module';
 import { appExtensions } from '../../src/main';
 
+const _ = require('lodash');
+
 describe('User Controller (e2e)', () => {
   let app: INestApplication;
 
@@ -45,6 +47,24 @@ describe('User Controller (e2e)', () => {
       { body: { ...baseBody, nationality: 12 } },
       { body: { ...baseBody, faceVector: [1] } },
     ])('should return 400 if body has at least 1 field not match class validator', ({ body }) => {
+      return request(app.getHttpServer())
+        .post('/users/identity-request')
+        .send(body)
+        .set('Accept', 'application/json')
+        .expect(400);
+    });
+
+    test.each([
+      { body: _.omit(baseBody, ['accountId']) },
+      { body: _.omit(baseBody, ['userPublicKey']) },
+      { body: _.omit(baseBody, ['name']) },
+      { body: _.omit(baseBody, ['gender']) },
+      { body: _.omit(baseBody, ['dob']) },
+      { body: _.omit(baseBody, ['phoneNumber']) },
+      { body: _.omit(baseBody, ['nationality']) },
+      { body: _.omit(baseBody, ['faceVector']) },
+    ])('should return 400 if any field is missing', ({ body }) => {
+      console.log(body);
       return request(app.getHttpServer())
         .post('/users/identity-request')
         .send(body)
