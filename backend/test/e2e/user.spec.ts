@@ -72,7 +72,7 @@ describe('User Controller (e2e)', () => {
         .expect(400);
     });
 
-    test('should return 201', () => {
+    test('should return 201 if fields are correct', () => {
       const body = {
         accountId: 'ngochieu642.testnet',
         userPublicKey: 'ed25519:GEY8FE8xVHnzmRv5k5e24VUncnqFrwDFGJSA11mGRiVo',
