@@ -6,6 +6,7 @@ const config = {
   transform: {
     '^.+\\.(t|j)s$': 'ts-jest',
   },
+  testTimeout: 500000,
 };
 
 module.exports = config;

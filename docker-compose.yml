@@ -1,0 +1,34 @@
+version: "3"
+services:
+  db:
+    image: postgres:14.3
+    container_name: near-vbi-k5-db
+    environment:
+      - "TZ=Europe/Amsterdam"
+      - "POSTGRES_USER=docker"
+      - "POSTGRES_PASSWORD=docker"
+    volumes:
+      - near-postgres-volume:/var/lib/postgresql/data
+      - "${PWD}/sql:/docker-entrypoint-initdb.d"
+    ports:
+      - "54320:5432"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "1k"
+
+  adminer:
+    image: adminer:4.8.1-standalone
+    container_name: near-vbi-k5-adminer
+    ports:
+      - 8080:8080
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "1k"
+
+volumes:
+  near-postgres-volume:
+    driver: local

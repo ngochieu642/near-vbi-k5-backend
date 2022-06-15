@@ -17,7 +17,7 @@ $ npm install
 $ npm run lint
 ```
 
-## Running the app
+## Run the app
 
 ```bash
 # development
