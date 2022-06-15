@@ -1,6 +1,6 @@
 .PHONY: dev-setup
 dev-setup:
-	docker-compose up -d db
+	docker-compose up -d db adminer
 
 .PHONY: dev-teardown
 dev-teardown:

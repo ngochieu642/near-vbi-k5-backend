@@ -18,6 +18,17 @@ services:
         max-file: "1"
         max-size: "1k"
 
+  adminer:
+    image: adminer:4.8.1-standalone
+    container_name: near-vbi-k5-adminer
+    ports:
+      - 8080:8080
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "1k"
+
 volumes:
   near-postgres-volume:
     driver: local
