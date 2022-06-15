@@ -1,6 +1,7 @@
 import { AfterInsert, AfterRemove, AfterUpdate, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Gender, IdentityRequestStatus, Nationality } from '../../shared/type';
 import { User } from '../users/users.entity';
+import { Verifier } from '../verifiers/verifiers.entity';
 
 @Entity()
 export class IdentityRequest {
@@ -42,6 +43,9 @@ export class IdentityRequest {
 
   @ManyToOne(() => User, (user) => user.identityRequests)
   user: User;
+
+  @ManyToOne(() => Verifier, (verifier) => verifier.identityRequests)
+  verifier: Verifier;
 
   @AfterInsert()
   logInsert() {}

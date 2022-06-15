@@ -1,5 +1,5 @@
-import {AfterInsert, AfterRemove, AfterUpdate, Column, Entity, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
-import {IdentityRequest} from "../identity-requests/identity-requests.entity";
+import { AfterInsert, AfterRemove, AfterUpdate, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { IdentityRequest } from '../identity-requests/identity-requests.entity';
 
 @Entity()
 export class User {
