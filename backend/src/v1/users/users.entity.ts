@@ -1,4 +1,5 @@
-import { AfterInsert, AfterRemove, AfterUpdate, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {AfterInsert, AfterRemove, AfterUpdate, Column, Entity, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
+import {IdentityRequest} from "../identity-requests/identity-requests.entity";
 
 @Entity()
 export class User {
@@ -13,6 +14,9 @@ export class User {
 
   @Column()
   username: string;
+
+  @OneToMany(() => IdentityRequest, (identityRequest) => identityRequest.user)
+  identityRequests: IdentityRequest[];
 
   @AfterInsert()
   logInsert() {
