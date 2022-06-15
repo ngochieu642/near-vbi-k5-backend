@@ -1,8 +1,8 @@
-import {HttpAdapterHost, NestFactory} from '@nestjs/core';
-import {Logger} from '@nestjs/common';
-import {AppModule} from './app.module';
-import {V1Constants} from './v1/V1Constants';
-import {AllExceptionsFilter} from "./framework-utils/all-exceptions.filter";
+import { HttpAdapterHost, NestFactory } from '@nestjs/core';
+import {Logger, ValidationPipe} from '@nestjs/common';
+import { AppModule } from './app.module';
+import { V1Constants } from './v1/V1Constants';
+import { AllExceptionsFilter } from './framework-utils/all-exceptions.filter';
 
 const logger = new Logger('main');
 
@@ -11,6 +11,13 @@ async function bootstrap() {
 
   // Prefix
   app.setGlobalPrefix(V1Constants.API_PREFIX);
+
+  // Pipe for validation
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+    }),
+  );
 
   // Filters
   const httpAdapter = app.get<HttpAdapterHost>(HttpAdapterHost);
