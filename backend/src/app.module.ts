@@ -5,6 +5,7 @@ import { AutomapperUserProfile } from './shared/AutomapperUserProfile';
 import { UsersModule } from './v1/users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './v1/users/users.entity';
+import { IdentityRequest } from './v1/identity-requests/identity-requests.entity';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { User } from './v1/users/users.entity';
       username: 'docker',
       password: 'docker',
       database: 'identity_app',
-      entities: [User],
+      entities: [User, IdentityRequest],
       synchronize: true,
     }),
     UsersModule,
