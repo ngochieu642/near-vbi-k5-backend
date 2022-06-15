@@ -37,7 +37,7 @@ export class UsersController {
     }
 
     const token = this.jwtService.sign({ email: body.email, user: validUser.id });
-    return new LoginResponseDto(token);
+    return new LoginResponseDto(token, validUser.id);
   }
 
   @UseGuards(JwtAuthGuard)
