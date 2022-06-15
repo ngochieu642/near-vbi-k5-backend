@@ -1,7 +1,18 @@
-import { AfterInsert, AfterRemove, AfterUpdate, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  AfterInsert,
+  AfterRemove,
+  AfterUpdate,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  Unique,
+} from 'typeorm';
 import { IdentityRequest } from '../identity-requests/identity-requests.entity';
 
 @Entity()
+@Unique(['email'])
+@Unique(['username'])
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
