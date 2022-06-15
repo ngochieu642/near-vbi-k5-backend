@@ -16,7 +16,7 @@ $ make dev-teardown
 ```
 
 ## Backend
-- [README](./backkend/README.md)
+- [README](./backend/README.md)
 
 # Cloud
 
