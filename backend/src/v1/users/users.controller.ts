@@ -1,5 +1,5 @@
-import { Body, Controller, Get, Logger, Param, Post, UnauthorizedException, UseGuards, Request } from '@nestjs/common';
-import { Request as RequestObject } from 'express';
+import { Body, Controller, Get, Logger, Param, Post, UnauthorizedException, UseGuards, Req } from '@nestjs/common';
+import { Request } from 'express';
 import { CreateUserDto } from './dtos/CreateUserDto';
 import { UsersService } from './users.service';
 import { CreateIdentityRequestDto } from './dtos/CreateIdentityRequestDto';
@@ -8,6 +8,7 @@ import { LoginDto } from './dtos/LoginDto';
 import { LoginResponseDto } from './dtos/LoginResponseDto';
 import { JwtService } from '@nestjs/jwt';
 import { JwtAuthGuard } from './jwt-auth.guard';
+import { UserInJwt } from '../../shared/type';
 
 @Controller('users')
 export class UsersController {
@@ -39,18 +40,18 @@ export class UsersController {
     return new LoginResponseDto(token);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('/:id')
-  async findUser(@Param('id') id: string) {
+  async findUser(@Req() request: Request, @Param('id') id: string) {
+    this.logger.log(request.user);
     this.logger.log(id);
   }
 
   @UseGuards(JwtAuthGuard)
   @Post('/identity-request')
-  async createIdentityRequest(
-    @Request() request: RequestObject,
-    @Body() body: CreateIdentityRequestDto,
-  ): Promise<void> {
-    this.logger.log(request.user);
+  async createIdentityRequest(@Req() request: Request, @Body() body: CreateIdentityRequestDto): Promise<void> {
+    const user: UserInJwt = request.user as UserInJwt; // See JwtStrategy
+    this.logger.log(user);
     this.logger.log(body);
     await this.identityRequestService.createFromRequestDto(body);
   }

@@ -11,3 +11,8 @@ export type Pending = 'pending';
 export type Rejected = 'rejected';
 export type Approved = 'approved';
 export type IdentityRequestStatus = Pending | Rejected | Approved;
+
+export interface UserInJwt {
+  id: string;
+  email: string;
+}
