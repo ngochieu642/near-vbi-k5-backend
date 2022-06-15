@@ -8,7 +8,7 @@ export class UsersService {
   constructor(@InjectRepository(User) private repo: Repository<User>) {}
 
   create(email: string, password: string): Promise<User> {
-    const user: User = this.repo.create({ email, password });
+    const user: User = this.repo.create({ email, password, username: 'demo-person' });
     return this.repo.save(user);
   }
 
