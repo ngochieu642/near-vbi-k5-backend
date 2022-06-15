@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Logger, Param, Post, UnauthorizedException, UseGuards, Request } from '@nestjs/common';
+import { Request as RequestObject } from 'express';
 import { CreateUserDto } from './dtos/CreateUserDto';
 import { UsersService } from './users.service';
 import { CreateIdentityRequestDto } from './dtos/CreateIdentityRequestDto';
@@ -45,19 +46,12 @@ export class UsersController {
 
   @UseGuards(JwtAuthGuard)
   @Post('/identity-request')
-  async createIdentityRequest(@Request() request, @Body() body: CreateIdentityRequestDto): Promise<void> {
-    this.logger.log(request);
-    await this.identityRequestService.createFromRequestDto(body);
+  async createIdentityRequest(
+    @Request() request: RequestObject,
+    @Body() body: CreateIdentityRequestDto,
+  ): Promise<void> {
+    this.logger.log(request.user);
     this.logger.log(body);
-  }
-
-  @UseGuards(JwtAuthGuard)
-  @Get('/profile')
-  async getProfile(@Request() request): Promise<any> {
-    this.logger.log(request);
-    return {
-      userId: request.user,
-      authenticated: true,
-    };
+    await this.identityRequestService.createFromRequestDto(body);
   }
 }

@@ -6,7 +6,7 @@ import {
   Entity,
   OneToMany,
   PrimaryGeneratedColumn,
-  Unique
+  Unique,
 } from 'typeorm';
 import { IdentityRequest } from '../identity-requests/identity-requests.entity';
 
