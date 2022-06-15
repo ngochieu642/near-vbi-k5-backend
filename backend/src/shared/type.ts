@@ -15,4 +15,5 @@ export type IdentityRequestStatus = Pending | Rejected | Approved;
 export interface UserInJwt {
   id: string;
   email: string;
+  roles: string[],
 }
