@@ -20,6 +20,10 @@ export class UsersService {
     return this.repo.find({ where: { email: email } });
   }
 
+  findByEmail(email: string): Promise<User | null> {
+    return this.repo.findOne({ where: { email: email } });
+  }
+
   async update(id: number, attrs: Partial<User>) {
     const user = await this.findOne(id);
 
@@ -38,5 +42,20 @@ export class UsersService {
     }
 
     return this.repo.remove(user);
+  }
+
+  async validateUser(email: string, password: string): Promise<User | null> {
+    const user = await this.findByEmail(email);
+
+    if (!user) {
+      return null;
+    }
+
+    // Check password
+    if (password == user.password) {
+      return user;
+    }
+
+    return null;
   }
 }

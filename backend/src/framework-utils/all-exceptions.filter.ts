@@ -21,11 +21,21 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
     const httpStatus = exception instanceof HttpException ? exception.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR;
 
+    const messages: string[] = [];
+
+    if (_.get(exception, 'message')) {
+      messages.push(_.get(exception, 'message'));
+    }
+
+    if (_.get(exception, 'response.message')) {
+      messages.push(_.get(exception, 'response.message'));
+    }
+
     const responseBody = {
       statusCode: httpStatus,
       timestamp: new Date().toISOString(),
       path: httpAdapter.getRequestUrl(ctx.getRequest()),
-      messages: _.get(exception, 'response.message') || [],
+      messages: messages,
     };
 
     httpAdapter.reply(ctx.getResponse(), responseBody, httpStatus);
