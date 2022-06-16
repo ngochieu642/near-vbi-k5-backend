@@ -20,7 +20,7 @@ export function appExtensions(app: INestApplication) {
 }
 
 async function bootstrap() {
-  const app: INestApplication = await NestFactory.create(AppModule);
+  const app: INestApplication = await NestFactory.create(AppModule, { cors: { origin: '*' } });
 
   // Prefix
   app.setGlobalPrefix(V1Constants.API_PREFIX);
