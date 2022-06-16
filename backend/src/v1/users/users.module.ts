@@ -6,7 +6,7 @@ import { User } from './users.entity';
 import { IdentityRequestsModule } from '../identity-requests/identity-requests.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ApplicationConstants } from '../../ApplicationConstants';
-import { JwtStrategy } from './jwt.strategy';
+import { UserJwtStrategy } from './user.jwt.strategy';
 
 @Module({
   imports: [
@@ -18,6 +18,6 @@ import { JwtStrategy } from './jwt.strategy';
     }),
   ],
   controllers: [UsersController],
-  providers: [UsersService, JwtStrategy],
+  providers: [UsersService, UserJwtStrategy],
 })
 export class UsersModule {}

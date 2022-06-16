@@ -5,7 +5,7 @@ import { ApplicationConstants } from '../../ApplicationConstants';
 import { UserInJwt } from '../../shared/type';
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy) {
+export class UserJwtStrategy extends PassportStrategy(Strategy) {
   constructor() {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -15,6 +15,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: any): Promise<UserInJwt> {
-    return { id: payload.user, email: payload.email, roles: ['verifier'] };
+    return { id: payload.user, email: payload.email, roles: [] };
   }
 }

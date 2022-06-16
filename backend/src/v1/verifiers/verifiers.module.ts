@@ -5,7 +5,7 @@ import { VerifiersService } from './verifiers.service';
 import { Verifier } from './verifiers.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { ApplicationConstants } from '../../ApplicationConstants';
-import { JwtStrategy } from './jwt.strategy';
+import { VerifierJwtStrategy } from './verifier.jwt.strategy';
 
 @Module({
   imports: [
@@ -16,6 +16,6 @@ import { JwtStrategy } from './jwt.strategy';
     }),
   ],
   controllers: [VerifiersController],
-  providers: [VerifiersService, JwtStrategy],
+  providers: [VerifiersService, VerifierJwtStrategy],
 })
 export class VerifiersModule {}
