@@ -6,10 +6,12 @@ import {
   Entity,
   OneToMany,
   PrimaryGeneratedColumn,
+  Unique,
 } from 'typeorm';
 import { IdentityRequest } from '../identity-requests/identity-requests.entity';
 
 @Entity()
+@Unique(['username'])
 export class Verifier {
   @PrimaryGeneratedColumn()
   id: number;
