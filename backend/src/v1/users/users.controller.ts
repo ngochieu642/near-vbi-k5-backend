@@ -7,7 +7,7 @@ import { IdentityRequestsService } from '../identity-requests/identity-requests.
 import { LoginDto } from './dtos/LoginDto';
 import { LoginResponseDto } from './dtos/LoginResponseDto';
 import { JwtService } from '@nestjs/jwt';
-import { JwtAuthGuard } from './jwt-auth.guard';
+import { UserJwtAuthGuard } from './user-jwt-auth.guard';
 import { UserInJwt } from '../../shared/type';
 import {User} from "./users.entity";
 
@@ -41,14 +41,14 @@ export class UsersController {
     return new LoginResponseDto(token, validUser.id);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(UserJwtAuthGuard)
   @Get('/:id')
   async findUser(@Req() request: Request, @Param('id') id: string) {
     this.logger.log(request.user);
     this.logger.log(id);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(UserJwtAuthGuard)
   @Post('/identity-request')
   async createIdentityRequest(@Req() request: Request, @Body() body: CreateIdentityRequestDto): Promise<void> {
     const userInJwt: UserInJwt = request.user as UserInJwt; // See JwtStrategy
