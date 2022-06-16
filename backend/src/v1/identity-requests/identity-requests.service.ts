@@ -3,7 +3,8 @@ import { DeepPartial, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IdentityRequest } from './identity-requests.entity';
 import { CreateIdentityRequestDto } from '../users/dtos/CreateIdentityRequestDto';
-import {User} from "../users/users.entity";
+import { User } from '../users/users.entity';
+import { IdentityRequestStatus } from '../../shared/type';
 
 @Injectable()
 export class IdentityRequestsService {
@@ -27,5 +28,9 @@ export class IdentityRequestsService {
 
     const identityRequest: IdentityRequest = this.repo.create(partialProperty);
     return this.repo.save(identityRequest);
+  }
+
+  async findAllByStatus(status = 'pending'): Promise<IdentityRequest[]> {
+    return this.repo.find({ where: { status: status as IdentityRequestStatus } });
   }
 }

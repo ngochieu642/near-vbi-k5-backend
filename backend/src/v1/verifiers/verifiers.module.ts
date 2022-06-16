@@ -17,5 +17,6 @@ import { VerifierJwtStrategy } from './verifier.jwt.strategy';
   ],
   controllers: [VerifiersController],
   providers: [VerifiersService, VerifierJwtStrategy],
+  exports: [VerifierJwtStrategy],
 })
 export class VerifiersModule {}
