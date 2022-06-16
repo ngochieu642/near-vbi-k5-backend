@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './v1/users/users.entity';
 import { IdentityRequest } from './v1/identity-requests/identity-requests.entity';
 import { Verifier } from './v1/verifiers/verifiers.entity';
+import { VerifiersModule } from './v1/verifiers/verifiers.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { Verifier } from './v1/verifiers/verifiers.entity';
       synchronize: true,
     }),
     UsersModule,
+    VerifiersModule,
   ],
   controllers: [],
   providers: [AutomapperUserProfile],
