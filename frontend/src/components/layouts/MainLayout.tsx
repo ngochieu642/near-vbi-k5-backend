@@ -84,6 +84,7 @@ const MainLayout = (props: any) => {
                         </ul>
                     </div>
                     <div className={"xs:flex-1 sm:flex-1 md:flex-1 flex justify-end items-center"} style={{width: 140}}>
+                        <LoginModal/>
                         {
                             wallet.isSignedIn() ?
                                 <>
