@@ -1,13 +1,12 @@
-import { Body, Controller, Get, Query, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Query, Req, UseGuards } from '@nestjs/common';
 import { Request } from 'express';
 import { IdentityRequestsService } from './identity-requests.service';
 import { VerifierJwtAuthGuard } from '../verifiers/verifier-jwt-auth.guard';
-import { VerifiersService } from '../verifiers/verifiers.service';
 import { IdentityRequest } from './identity-requests.entity';
 
 @Controller('identity-requests')
 export class IdentityRequestsController {
-  constructor(private identityRequestsService: IdentityRequestsService, private verifierService: VerifiersService) {}
+  constructor(private identityRequestsService: IdentityRequestsService) {}
 
   @UseGuards(VerifierJwtAuthGuard)
   @Get('/identity-requests')
