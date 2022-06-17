@@ -11,7 +11,7 @@ import { VerifierJwtStrategy } from './verifier.jwt.strategy';
   imports: [
     TypeOrmModule.forFeature([Verifier]),
     JwtModule.register({
-      secret: ApplicationConstants.JTW_SECRET,
+      secret: ApplicationConstants.JWT_SECRET_VERIFIER,
       signOptions: { expiresIn: '20h' },
     }),
   ],

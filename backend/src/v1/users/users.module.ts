@@ -13,7 +13,7 @@ import { UserJwtStrategy } from './user.jwt.strategy';
     TypeOrmModule.forFeature([User]),
     IdentityRequestsModule,
     JwtModule.register({
-      secret: ApplicationConstants.JTW_SECRET,
+      secret: ApplicationConstants.JWT_SECRET_USER,
       signOptions: { expiresIn: '20h' },
     }),
   ],
