@@ -27,7 +27,7 @@ export class VerifiersService {
     return null;
   }
 
-  private async findByUsername(username: string): Promise<Verifier | null> {
-    return this.repo.findOne({ where: { username: username} });
+  public async findByUsername(username: string): Promise<Verifier | null> {
+    return this.repo.findOne({ where: { username: username } });
   }
 }

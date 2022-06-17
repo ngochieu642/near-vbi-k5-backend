@@ -17,3 +17,9 @@ export interface UserInJwt {
   email: string;
   roles: string[];
 }
+
+export interface VerifierInJwt {
+  id: number;
+  username: string;
+  roles: string[];
+}
