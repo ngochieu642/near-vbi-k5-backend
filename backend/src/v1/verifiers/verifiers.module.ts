@@ -5,17 +5,18 @@ import { VerifiersService } from './verifiers.service';
 import { Verifier } from './verifiers.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { ApplicationConstants } from '../../ApplicationConstants';
-import { JwtStrategy } from './jwt.strategy';
+import { VerifierJwtStrategy } from './verifier.jwt.strategy';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Verifier]),
     JwtModule.register({
-      secret: ApplicationConstants.JTW_SECRET,
+      secret: ApplicationConstants.JWT_SECRET_VERIFIER,
       signOptions: { expiresIn: '20h' },
     }),
   ],
   controllers: [VerifiersController],
-  providers: [VerifiersService, JwtStrategy],
+  providers: [VerifiersService, VerifierJwtStrategy],
+  exports: [VerifierJwtStrategy],
 })
 export class VerifiersModule {}

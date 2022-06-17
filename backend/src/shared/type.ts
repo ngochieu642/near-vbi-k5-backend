@@ -13,7 +13,7 @@ export type Approved = 'approved';
 export type IdentityRequestStatus = Pending | Rejected | Approved;
 
 export interface UserInJwt {
-  id: string;
+  id: number;
   email: string;
-  roles: string[],
+  roles: string[];
 }

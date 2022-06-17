@@ -5,12 +5,12 @@ import { ApplicationConstants } from '../../ApplicationConstants';
 import { UserInJwt } from '../../shared/type';
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy) {
+export class VerifierJwtStrategy extends PassportStrategy(Strategy) {
   constructor() {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: ApplicationConstants.JTW_SECRET,
+      secretOrKey: ApplicationConstants.JWT_SECRET_VERIFIER,
     });
   }
 
