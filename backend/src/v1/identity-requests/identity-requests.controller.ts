@@ -9,7 +9,7 @@ export class IdentityRequestsController {
   constructor(private identityRequestsService: IdentityRequestsService) {}
 
   @UseGuards(VerifierJwtAuthGuard)
-  @Get('/identity-requests')
+  @Get('/')
   async getAllIdentityRequests(@Req() request: Request, @Query('status') status): Promise<IdentityRequest[]> {
     return this.identityRequestsService.findAllByStatus(status);
   }
