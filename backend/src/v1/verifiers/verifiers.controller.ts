@@ -21,13 +21,13 @@ export class VerifiersController {
 
   @Post('/login')
   async login(@Body() body: LoginDto): Promise<LoginResponseVerifierDto> {
-    const validUser = await this.verifiersService.validateUser(body.username, body.password);
+    const validVerifier = await this.verifiersService.validateUser(body.username, body.password);
 
-    if (!validUser) {
+    if (!validVerifier) {
       throw new UnauthorizedException();
     }
 
-    const token = this.jwtService.sign({ id: validUser.id, username: validUser.username});
-    return new LoginResponseDto(token, validUser.id);
+    const token = this.jwtService.sign({ id: validVerifier.id, username: validVerifier.username});
+    return new LoginResponseDto(token, validVerifier.id);
   }
 }
