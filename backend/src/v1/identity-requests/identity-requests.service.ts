@@ -33,4 +33,8 @@ export class IdentityRequestsService {
   async findAllByStatus(status = 'pending'): Promise<IdentityRequest[]> {
     return this.repo.find({ where: { status: status as IdentityRequestStatus } });
   }
+
+  async findById(id: number): Promise<IdentityRequest | null> {
+    return this.repo.findOne({ where: { id: id } });
+  }
 }

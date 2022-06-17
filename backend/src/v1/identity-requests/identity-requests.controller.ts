@@ -1,10 +1,25 @@
-import { Body, Controller, forwardRef, Get, Inject, Logger, Param, Post, Query, Req, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  forwardRef,
+  Get,
+  Inject,
+  Logger,
+  NotFoundException,
+  Param,
+  Post,
+  Query,
+  Req,
+  UnauthorizedException,
+  UseGuards,
+} from '@nestjs/common';
 import { Request } from 'express';
 import { IdentityRequestsService } from './identity-requests.service';
 import { VerifierJwtAuthGuard } from '../verifiers/verifier-jwt-auth.guard';
 import { IdentityRequest } from './identity-requests.entity';
 import { ApproveRequestDto } from './dtos/ApproveRequestDto';
 import { VerifiersService } from '../verifiers/verifiers.service';
+import { Verifier } from '../verifiers/verifiers.entity';
 
 @Controller('identity-requests')
 export class IdentityRequestsController {
@@ -27,8 +42,18 @@ export class IdentityRequestsController {
   @UseGuards(VerifierJwtAuthGuard)
   @Post('/:id/approve')
   async approvedRequest(@Req() request, @Param('id') id: string, @Body() body: ApproveRequestDto) {
-    this.logger.log(request.user);
-    this.logger.log(id);
-    this.logger.log(body);
+    const verifier: Verifier | null = await this.verifierService.findByUsername(request.user.username);
+
+    if (verifier === null) {
+      throw new UnauthorizedException();
+    }
+
+    const identityRequest: IdentityRequest | null = await this.identityRequestsService.findById(Number(id));
+
+    if (identityRequest === null) {
+      throw new NotFoundException('Can not find request with id ' + id);
+    }
+
+
   }
 }
