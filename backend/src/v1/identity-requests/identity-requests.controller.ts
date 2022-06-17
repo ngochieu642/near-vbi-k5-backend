@@ -54,6 +54,7 @@ export class IdentityRequestsController {
       throw new NotFoundException('Can not find request with id ' + id);
     }
 
-
+    const updatedRequest = this.identityRequestsService.update(Number(id), { status: body.approve });
+    return updatedRequest;
   }
 }

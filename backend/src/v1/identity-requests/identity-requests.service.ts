@@ -37,4 +37,14 @@ export class IdentityRequestsService {
   async findById(id: number): Promise<IdentityRequest | null> {
     return this.repo.findOne({ where: { id: id } });
   }
+  async update(id: number, attrs: Partial<IdentityRequest>): Promise<IdentityRequest> {
+    const identityRequest = await this.findById(id);
+
+    if (!identityRequest) {
+      throw new Error('request not found');
+    }
+
+    Object.assign(identityRequest, attrs);
+    return this.repo.save(identityRequest);
+  }
 }
