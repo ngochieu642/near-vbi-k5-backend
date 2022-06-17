@@ -9,7 +9,7 @@ import { LoginResponseDto } from './dtos/LoginResponseDto';
 import { JwtService } from '@nestjs/jwt';
 import { UserJwtAuthGuard } from './user-jwt-auth.guard';
 import { UserInJwt } from '../../shared/type';
-import {User} from "./users.entity";
+import { User } from './users.entity';
 
 @Controller('users')
 export class UsersController {
