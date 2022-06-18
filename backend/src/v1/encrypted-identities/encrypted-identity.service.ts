@@ -12,14 +12,14 @@ export class EncryptedIdentityService {
   }
 
   async update(id: number, attrs: Partial<EncryptedIdentity>) {
-    const user = await this.findOne(id);
+    const identity = await this.findOne(id);
 
-    if (!user) {
-      throw new Error('User not found');
+    if (!identity) {
+      throw new Error('Identity not found');
     }
 
-    Object.assign(user, attrs);
-    await this.repo.save(user);
+    Object.assign(identity, attrs);
+    await this.repo.save(identity);
   }
 
   async remove(id: number): Promise<EncryptedIdentity> {
