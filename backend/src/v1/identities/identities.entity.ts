@@ -10,7 +10,7 @@ import {
 } from 'typeorm';
 import { IsIn } from 'class-validator';
 import { User } from '../users/user.entity';
-import { Verifier } from '../verifiers/verifiers.entity';
+import { Verifier } from '../verifiers/verifier.entity';
 import { JoinColumn } from 'typeorm/browser';
 
 @Entity()

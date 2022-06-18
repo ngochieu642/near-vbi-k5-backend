@@ -3,15 +3,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { IdentityRequestsController } from './identity-requests.controller';
 import { IdentityRequestsService } from './identity-requests.service';
 import { IdentityRequest } from './identity-requests.entity';
-import { VerifierJwtStrategy } from '../verifiers/verifier.jwt.strategy';
-import { VerifiersModule } from '../verifiers/verifiers.module';
-import { VerifiersService } from '../verifiers/verifiers.service';
-import { Verifier } from '../verifiers/verifiers.entity';
+import { VerifierJwtStrategy } from '../verifiers/verifier.jwt-strategy';
+import { VerifierModule } from '../verifiers/verifier.module';
+import { VerifierService } from '../verifiers/verifier.service';
+import { Verifier } from '../verifiers/verifier.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([IdentityRequest, Verifier]), VerifiersModule],
+  imports: [TypeOrmModule.forFeature([IdentityRequest, Verifier]), VerifierModule],
   controllers: [IdentityRequestsController],
-  providers: [IdentityRequestsService, VerifierJwtStrategy, VerifiersService],
+  providers: [IdentityRequestsService, VerifierJwtStrategy, VerifierService],
   exports: [IdentityRequestsService],
 })
 export class IdentityRequestsModule {}

@@ -15,11 +15,11 @@ import {
 } from '@nestjs/common';
 import { Request } from 'express';
 import { IdentityRequestsService } from './identity-requests.service';
-import { VerifierJwtAuthGuard } from '../verifiers/verifier-jwt-auth.guard';
+import { VerifierJwtAuthGuard } from '../verifiers/verifier.jwt-auth.guard';
 import { IdentityRequest } from './identity-requests.entity';
 import { ApproveRequestDto } from './dtos/ApproveRequestDto';
-import { VerifiersService } from '../verifiers/verifiers.service';
-import { Verifier } from '../verifiers/verifiers.entity';
+import { VerifierService } from '../verifiers/verifier.service';
+import { Verifier } from '../verifiers/verifier.entity';
 
 @Controller('identity-requests')
 export class IdentityRequestsController {
@@ -27,8 +27,8 @@ export class IdentityRequestsController {
 
   constructor(
     private identityRequestsService: IdentityRequestsService,
-    @Inject(forwardRef(() => VerifiersService))
-    private verifierService: VerifiersService,
+    @Inject(forwardRef(() => VerifierService))
+    private verifierService: VerifierService,
   ) {
     this.logger = new Logger(IdentityRequestsController.name);
   }
