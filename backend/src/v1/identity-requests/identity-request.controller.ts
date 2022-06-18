@@ -22,6 +22,7 @@ import { VerifierService } from '../verifiers/verifier.service';
 import { Verifier } from '../verifiers/verifier.entity';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { EncryptionService } from '../../shared/encryption/EncryptionService';
+import { ApproveRequestResponseDto } from './dtos/approve-request.response.dto';
 
 @ApiTags('identity requests')
 @Controller('identity-requests')
@@ -46,7 +47,11 @@ export class IdentityRequestController {
   @ApiBearerAuth('Bearer')
   @UseGuards(VerifierJwtAuthGuard)
   @Post('/:id/approve')
-  async approvedRequest(@Req() request, @Param('id') id: string, @Body() body: ApproveRequestDto) {
+  async approvedRequest(
+    @Req() request,
+    @Param('id') id: string,
+    @Body() body: ApproveRequestDto,
+  ): Promise<ApproveRequestResponseDto> {
     const verifier: Verifier | null = await this.verifierService.findByUsername(request.user.username);
 
     if (verifier === null) {
@@ -68,6 +73,6 @@ export class IdentityRequestController {
 
     this.logger.log(encryptedData);
 
-    return encryptedData;
+    return new ApproveRequestResponseDto(EncryptionService.getHashObject(''));
   }
 }

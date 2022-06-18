@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { IdentityController } from './identity.controller';
-import { IdentityService } from './identity.service';
-import { Identity } from './identity.entity';
+import { EncryptedIdentityController } from './encrypted-identity.controller';
+import { EncryptedIdentityService } from './encrypted-identity.service';
+import { Identity } from './encrypted-identity.entity';
 import { IdentityRequestModule } from '../identity-requests/identity-request.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ApplicationConstants } from '../../ApplicationConstants';
@@ -16,8 +16,8 @@ import { ApplicationConstants } from '../../ApplicationConstants';
       signOptions: { expiresIn: '20h' },
     }),
   ],
-  controllers: [IdentityController],
-  providers: [IdentityService],
+  controllers: [EncryptedIdentityController],
+  providers: [EncryptedIdentityService],
   exports: [],
 })
-export class IdentityModule {}
+export class EncryptedIdentityModule {}

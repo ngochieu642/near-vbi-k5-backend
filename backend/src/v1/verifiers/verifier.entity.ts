@@ -9,7 +9,7 @@ import {
   Unique,
 } from 'typeorm';
 import { IdentityRequest } from '../identity-requests/identity-request.entity';
-import { Identity } from '../identities/identity.entity';
+import { Identity } from '../encrypted-identities/encrypted-identity.entity';
 
 @Entity()
 @Unique(['username'])
