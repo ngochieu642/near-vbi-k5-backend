@@ -1,4 +1,4 @@
-import {IsIn, IsString} from 'class-validator';
+import { IsIn, IsString } from 'class-validator';
 import { IdentityRequestStatus } from '../../../shared/type';
 
 export class ApproveRequestDto {

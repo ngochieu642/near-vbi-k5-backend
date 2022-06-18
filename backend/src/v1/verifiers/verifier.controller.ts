@@ -27,7 +27,7 @@ export class VerifierController {
       throw new UnauthorizedException();
     }
 
-    const token = this.jwtService.sign({ id: validVerifier.id, username: validVerifier.username});
+    const token = this.jwtService.sign({ id: validVerifier.id, username: validVerifier.username });
     return new LoginResponseDto(token, validVerifier.id);
   }
 }
