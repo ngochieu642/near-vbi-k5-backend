@@ -6,7 +6,8 @@ import {useHomeForm} from '~containers/useHomeForm'
 import {useHelper} from '~containers/useHelper'
 import {NotificationType} from '~common/enum/notification'
 import {useDispatch} from 'react-redux'
-import {setIsLoginVisible} from '~store/commonSlice'
+import {setIsLoginVisible, setCurrentTab} from '~store/commonSlice'
+import {AUTHEN_TAB} from '~common/enum/login'
 
 export const useSignUp = (form: FormInstance) => {
 
@@ -17,16 +18,17 @@ export const useSignUp = (form: FormInstance) => {
         (user_info) => signup(user_info),
         {
             onSuccess: (data, variables, context) => {
+                dispatch(setCurrentTab(AUTHEN_TAB.Login));
                 openNotificationWithIcon(NotificationType.SUCCESS, 'Register Success');
             },
             onError: (error, variables, context) => {
                 // An error happened!
                 console.log(error);
                 openNotificationWithIcon(NotificationType.ERROR, 'Something went wrong');
+                dispatch(setIsLoginVisible(false));
             },
             onSettled: (data, error, variables, context) => {
                 // Error or success... doesn't matter!
-                dispatch(setIsLoginVisible(false));
             },
         }
     );

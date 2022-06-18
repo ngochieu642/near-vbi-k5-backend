@@ -3,6 +3,8 @@ import React, {useState} from 'react';
 import {useLoginModal} from '~containers/useLoginModal'
 import LoginForm from '~components/Auth/LoginForm'
 import SignUpForm from '~components/Auth/SignUpForm'
+import {AUTHEN_TAB} from '~common/enum/login'
+import TestForm from '~components/Auth/TestForm'
 
 const LoginModal = () => {
     const {
@@ -11,10 +13,12 @@ const LoginModal = () => {
         setTabValue,
         visible,
         confirmLoading,
-        tabValue,
+        currentTab,
         options,
-        isLoginVisible
+        isLoginVisible,
+        role,
     } = useLoginModal();
+
     const {TabPane} = Tabs;
 
     return (
@@ -42,21 +46,19 @@ const LoginModal = () => {
                         onChange={(e) => {
                             setTabValue(e.target.value)
                         }}
-                        value={tabValue}
+                        value={currentTab}
                         optionType="button"
                     />
 
                 </div>
-                <Tabs activeKey={tabValue} className="staking-tabs">
-                    <TabPane key="login">
+                <Tabs activeKey={currentTab} className="staking-tabs">
+                    <TabPane key={AUTHEN_TAB.Login}>
                         <LoginForm/>
                     </TabPane>
-                    <TabPane key="signup">
+                    <TabPane key={AUTHEN_TAB.SignUp}>
                         <SignUpForm/>
                     </TabPane>
                 </Tabs>
-                {/*<SignUpForm/>*/}
-                {/*<ForgotPassForm/>*/}
             </Modal>
         </>
     );
