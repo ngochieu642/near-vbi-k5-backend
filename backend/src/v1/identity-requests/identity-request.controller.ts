@@ -64,7 +64,12 @@ export class IdentityRequestController {
       throw new NotFoundException('Can not find request with id ' + id);
     }
 
-    const hash: string = await this.identityRequestsService.approveIdentityRequest(identityRequest, body, verifier);
-    return new ApproveRequestResponseDto(hash);
+    const { hash, encryptedDataId } = await this.identityRequestsService.approveIdentityRequest(
+      identityRequest,
+      body,
+      verifier,
+    );
+
+    return new ApproveRequestResponseDto(encryptedDataId, hash);
   }
 }
