@@ -9,7 +9,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { IsIn } from 'class-validator';
-import { User } from '../users/users.entity';
+import { User } from '../users/user.entity';
 import { Verifier } from '../verifiers/verifiers.entity';
 import { JoinColumn } from 'typeorm/browser';
 

@@ -3,7 +3,7 @@ import { DeepPartial, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IdentityRequest } from './identity-requests.entity';
 import { CreateIdentityRequestDto } from '../users/dtos/CreateIdentityRequestDto';
-import { User } from '../users/users.entity';
+import { User } from '../users/user.entity';
 import { IdentityRequestStatus } from '../../shared/type';
 
 @Injectable()

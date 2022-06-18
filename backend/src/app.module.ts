@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { AutomapperModule } from '@automapper/nestjs';
 import { classes } from '@automapper/classes';
 import { AutomapperUserProfile } from './shared/AutomapperUserProfile';
-import { UsersModule } from './v1/users/users.module';
+import { UserModule } from './v1/users/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './v1/users/users.entity';
+import { User } from './v1/users/user.entity';
 import { IdentityRequest } from './v1/identity-requests/identity-requests.entity';
 import { Verifier } from './v1/verifiers/verifiers.entity';
 import { VerifiersModule } from './v1/verifiers/verifiers.module';
@@ -24,7 +24,7 @@ import { VerifiersModule } from './v1/verifiers/verifiers.module';
       entities: [User, IdentityRequest, Verifier],
       synchronize: true,
     }),
-    UsersModule,
+    UserModule,
     VerifiersModule,
   ],
   controllers: [],

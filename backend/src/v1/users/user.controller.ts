@@ -1,26 +1,26 @@
 import { Body, Controller, Get, Logger, Param, Post, UnauthorizedException, UseGuards, Req } from '@nestjs/common';
 import { Request } from 'express';
 import { CreateUserDto } from './dtos/CreateUserDto';
-import { UsersService } from './users.service';
+import { UserService } from './user.service';
 import { CreateIdentityRequestDto } from './dtos/CreateIdentityRequestDto';
 import { IdentityRequestsService } from '../identity-requests/identity-requests.service';
 import { LoginDto } from './dtos/LoginDto';
 import { LoginResponseDto } from './dtos/LoginResponseDto';
 import { JwtService } from '@nestjs/jwt';
-import { UserJwtAuthGuard } from './user-jwt-auth.guard';
+import { UserJwtAuthGuard } from './user.jwt-auth.guard';
 import { UserInJwt } from '../../shared/type';
-import { User } from './users.entity';
+import { User } from './user.entity';
 
 @Controller('users')
-export class UsersController {
+export class UserController {
   private logger: Logger;
 
   constructor(
-    private userService: UsersService,
+    private userService: UserService,
     private identityRequestService: IdentityRequestsService,
     private jwtService: JwtService,
   ) {
-    this.logger = new Logger(UsersController.name);
+    this.logger = new Logger(UserController.name);
   }
 
   @Post('/signup')
