@@ -10,7 +10,9 @@ import { JwtService } from '@nestjs/jwt';
 import { UserJwtAuthGuard } from './user.jwt-auth.guard';
 import { UserInJwt } from '../../shared/type';
 import { User } from './user.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('users')
 @Controller('users')
 export class UserController {
   private logger: Logger;

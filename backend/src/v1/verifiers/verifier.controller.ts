@@ -5,7 +5,9 @@ import { JwtService } from '@nestjs/jwt';
 import { CreateVerifierDto } from './dtos/create-verifier.dto';
 import { LoginResponseVerifierDto } from './dtos/login-response-verifier.dto';
 import { LoginDto } from './dtos/login.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('verifiers')
 @Controller('verifiers')
 export class VerifierController {
   private logger: Logger;

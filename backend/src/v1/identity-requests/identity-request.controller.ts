@@ -20,7 +20,9 @@ import { IdentityRequest } from './identity-request.entity';
 import { ApproveRequestDto } from './dtos/approve-request.dto';
 import { VerifierService } from '../verifiers/verifier.service';
 import { Verifier } from '../verifiers/verifier.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('identity requests')
 @Controller('identity-requests')
 export class IdentityRequestController {
   private logger: Logger;

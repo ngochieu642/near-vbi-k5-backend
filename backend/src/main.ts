@@ -24,7 +24,11 @@ export function appExtensions(app: INestApplication) {
     .setTitle('Identity App')
     .setDescription('Blockchain Identity App')
     .setVersion('1.0')
-    .addTag('blockchain')
+    .addTag('users', 'User API')
+    .addTag('verifiers', 'Verifier API')
+    .addTag('identity requests', 'Identity Request API')
+    .addTag('identities', 'Identity API')
+    .addTag('companies', 'Company API')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger-ui', app, document);
