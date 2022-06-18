@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Verifier } from './verifiers.entity';
+import { Verifier } from './verifier.entity';
 
 @Injectable()
-export class VerifiersService {
+export class VerifierService {
   constructor(@InjectRepository(Verifier) private repo: Repository<Verifier>) {}
 
   async create(username: string, password: string) {

@@ -1,5 +1,5 @@
 import { Body, Controller, Logger, Post, UnauthorizedException } from '@nestjs/common';
-import { VerifiersService } from './verifiers.service';
+import { VerifierService } from './verifier.service';
 import { LoginResponseDto } from '../users/dtos/LoginResponseDto';
 import { JwtService } from '@nestjs/jwt';
 import { CreateVerifierDto } from './dtos/CreateVerifierDto';
@@ -7,10 +7,10 @@ import { LoginResponseVerifierDto } from './dtos/LoginResponseVerifierDto';
 import { LoginDto } from './dtos/LoginDto';
 
 @Controller('verifiers')
-export class VerifiersController {
+export class VerifierController {
   private logger: Logger;
-  constructor(private verifiersService: VerifiersService, private jwtService: JwtService) {
-    this.logger = new Logger(VerifiersController.name);
+  constructor(private verifiersService: VerifierService, private jwtService: JwtService) {
+    this.logger = new Logger(VerifierController.name);
   }
 
   @Post('/signup')

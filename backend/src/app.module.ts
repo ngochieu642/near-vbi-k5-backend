@@ -2,12 +2,13 @@ import { Module } from '@nestjs/common';
 import { AutomapperModule } from '@automapper/nestjs';
 import { classes } from '@automapper/classes';
 import { AutomapperUserProfile } from './shared/AutomapperUserProfile';
-import { UsersModule } from './v1/users/users.module';
+import { UserModule } from './v1/users/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './v1/users/users.entity';
-import { IdentityRequest } from './v1/identity-requests/identity-requests.entity';
-import { Verifier } from './v1/verifiers/verifiers.entity';
-import { VerifiersModule } from './v1/verifiers/verifiers.module';
+import { User } from './v1/users/user.entity';
+import { IdentityRequest } from './v1/identity-requests/identity-request.entity';
+import { Verifier } from './v1/verifiers/verifier.entity';
+import { VerifierModule } from './v1/verifiers/verifier.module';
+import { Identity } from './v1/identities/identity.entity';
 
 @Module({
   imports: [
@@ -21,11 +22,11 @@ import { VerifiersModule } from './v1/verifiers/verifiers.module';
       username: 'docker',
       password: 'docker',
       database: 'identity_app',
-      entities: [User, IdentityRequest, Verifier],
+      entities: [User, IdentityRequest, Verifier, Identity],
       synchronize: true,
     }),
-    UsersModule,
-    VerifiersModule,
+    UserModule,
+    VerifierModule,
   ],
   controllers: [],
   providers: [AutomapperUserProfile],

@@ -1,7 +1,7 @@
 import { AfterInsert, AfterRemove, AfterUpdate, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Gender, IdentityRequestStatus, Nationality } from '../../shared/type';
-import { User } from '../users/users.entity';
-import { Verifier } from '../verifiers/verifiers.entity';
+import { User } from '../users/user.entity';
+import { Verifier } from '../verifiers/verifier.entity';
 import { IsIn } from 'class-validator';
 
 @Entity()

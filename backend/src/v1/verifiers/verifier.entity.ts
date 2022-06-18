@@ -8,7 +8,8 @@ import {
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
-import { IdentityRequest } from '../identity-requests/identity-requests.entity';
+import { IdentityRequest } from '../identity-requests/identity-request.entity';
+import { Identity } from '../identities/identity.entity';
 
 @Entity()
 @Unique(['username'])
@@ -24,6 +25,9 @@ export class Verifier {
 
   @OneToMany(() => IdentityRequest, (identityRequest) => identityRequest.verifier)
   identityRequests: IdentityRequest[];
+
+  @OneToMany(() => Identity, (identity) => identity.verifier)
+  identity: Identity[];
 
   @AfterInsert()
   logInsert() {}
