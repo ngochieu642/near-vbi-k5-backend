@@ -7,11 +7,11 @@ import {
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
+  JoinColumn,
 } from 'typeorm';
 import { IsIn } from 'class-validator';
 import { User } from '../users/user.entity';
 import { Verifier } from '../verifiers/verifier.entity';
-import { JoinColumn } from 'typeorm/browser';
 
 @Entity()
 export class Identity {
