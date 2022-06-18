@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Identity } from './identities.entity';
+import { Identity } from './identity.entity';
 
 @Injectable()
-export class IdentitiesService {
+export class IdentityService {
   constructor(@InjectRepository(Identity) private repo: Repository<Identity>) {}
 
   findOne(id: number): Promise<Identity> {
