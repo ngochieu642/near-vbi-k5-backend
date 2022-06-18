@@ -98,16 +98,34 @@ export class IdentityRequestService {
     const { publicKey } = EncryptionService.loadKeys();
 
     // Save encrypted data
-    const encryptedIdentity = this.encryptedIdentityRepository.create({
+    const encryptedIdentity: EncryptedIdentity = this.encryptedIdentityRepository.create({
       encryptedData: encryptedData,
       user: identityRequest.user,
       verifier: verifier,
       publicKey: publicKey,
     });
 
-    await this.encryptedIdentityRepository.save(encryptedIdentity);
+    await this.upsertEncryptedIdentityByUserId(identityRequest.user.id, encryptedIdentity);
 
     // Return hash for identity
     return EncryptionService.getHashObject(identity);
+  }
+
+  private async upsertEncryptedIdentityByUserId(
+    userId: number,
+    encryptedIdentity: EncryptedIdentity,
+  ): Promise<EncryptedIdentity> {
+    const result: EncryptedIdentity = await this.encryptedIdentityRepository
+      .createQueryBuilder('e')
+      .innerJoinAndSelect('e.user', 'user')
+      .where('user.id= :id', { id: userId })
+      .getOne();
+
+    if (result === null) {
+      return await this.encryptedIdentityRepository.save(encryptedIdentity);
+    }
+
+    Object.assign(result, encryptedIdentity);
+    return await this.encryptedIdentityRepository.save(result);
   }
 }
