@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { DeepPartial, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IdentityRequest } from './identity-requests.entity';
+import { IdentityRequest } from './identity-request.entity';
 import { CreateIdentityRequestDto } from '../users/dtos/CreateIdentityRequestDto';
 import { User } from '../users/user.entity';
 import { IdentityRequestStatus } from '../../shared/type';
 
 @Injectable()
-export class IdentityRequestsService {
+export class IdentityRequestService {
   constructor(@InjectRepository(IdentityRequest) private repo: Repository<IdentityRequest>) {}
 
   createFromRequestDto(dto: CreateIdentityRequestDto, user: User): Promise<IdentityRequest> {

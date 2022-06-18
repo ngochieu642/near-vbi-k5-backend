@@ -3,7 +3,7 @@ import { Request } from 'express';
 import { CreateUserDto } from './dtos/CreateUserDto';
 import { UserService } from './user.service';
 import { CreateIdentityRequestDto } from './dtos/CreateIdentityRequestDto';
-import { IdentityRequestsService } from '../identity-requests/identity-requests.service';
+import { IdentityRequestService } from '../identity-requests/identity-request.service';
 import { LoginDto } from './dtos/LoginDto';
 import { LoginResponseDto } from './dtos/LoginResponseDto';
 import { JwtService } from '@nestjs/jwt';
@@ -17,7 +17,7 @@ export class UserController {
 
   constructor(
     private userService: UserService,
-    private identityRequestService: IdentityRequestsService,
+    private identityRequestService: IdentityRequestService,
     private jwtService: JwtService,
   ) {
     this.logger = new Logger(UserController.name);

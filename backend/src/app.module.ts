@@ -5,7 +5,7 @@ import { AutomapperUserProfile } from './shared/AutomapperUserProfile';
 import { UserModule } from './v1/users/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './v1/users/user.entity';
-import { IdentityRequest } from './v1/identity-requests/identity-requests.entity';
+import { IdentityRequest } from './v1/identity-requests/identity-request.entity';
 import { Verifier } from './v1/verifiers/verifier.entity';
 import { VerifierModule } from './v1/verifiers/verifier.module';
 

@@ -8,7 +8,7 @@ import {
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
-import { IdentityRequest } from '../identity-requests/identity-requests.entity';
+import { IdentityRequest } from '../identity-requests/identity-request.entity';
 import { Identity } from '../identities/identities.entity';
 
 @Entity()

@@ -3,14 +3,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { IdentitiesController } from './identities.controller';
 import { IdentitiesService } from './identities.service';
 import { Identity } from './identities.entity';
-import { IdentityRequestsModule } from '../identity-requests/identity-requests.module';
+import { IdentityRequestModule } from '../identity-requests/identity-request.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ApplicationConstants } from '../../ApplicationConstants';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Identity]),
-    IdentityRequestsModule,
+    IdentityRequestModule,
     JwtModule.register({
       secret: ApplicationConstants.JWT_SECRET_USER,
       signOptions: { expiresIn: '20h' },
