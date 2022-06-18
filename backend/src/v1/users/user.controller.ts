@@ -1,11 +1,11 @@
 import { Body, Controller, Get, Logger, Param, Post, UnauthorizedException, UseGuards, Req } from '@nestjs/common';
 import { Request } from 'express';
-import { CreateUserDto } from './dtos/CreateUserDto';
+import { CreateUserDto } from './dtos/create-user.dto';
 import { UserService } from './user.service';
-import { CreateIdentityRequestDto } from './dtos/CreateIdentityRequestDto';
+import { CreateIdentityRequestDto } from './dtos/create-identity-request.dto';
 import { IdentityRequestService } from '../identity-requests/identity-request.service';
-import { LoginDto } from './dtos/LoginDto';
-import { LoginResponseDto } from './dtos/LoginResponseDto';
+import { LoginDto } from './dtos/login.dto';
+import { LoginResponseDto } from './dtos/login-response.dto';
 import { JwtService } from '@nestjs/jwt';
 import { UserJwtAuthGuard } from './user.jwt-auth.guard';
 import { UserInJwt } from '../../shared/type';

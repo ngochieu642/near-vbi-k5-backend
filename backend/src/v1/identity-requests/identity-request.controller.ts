@@ -17,7 +17,7 @@ import { Request } from 'express';
 import { IdentityRequestService } from './identity-request.service';
 import { VerifierJwtAuthGuard } from '../verifiers/verifier.jwt-auth.guard';
 import { IdentityRequest } from './identity-request.entity';
-import { ApproveRequestDto } from './dtos/ApproveRequestDto';
+import { ApproveRequestDto } from './dtos/approve-request.dto';
 import { VerifierService } from '../verifiers/verifier.service';
 import { Verifier } from '../verifiers/verifier.entity';
 

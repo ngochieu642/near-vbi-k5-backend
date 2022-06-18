@@ -1,10 +1,10 @@
 import { Body, Controller, Logger, Post, UnauthorizedException } from '@nestjs/common';
 import { VerifierService } from './verifier.service';
-import { LoginResponseDto } from '../users/dtos/LoginResponseDto';
+import { LoginResponseDto } from '../users/dtos/login-response.dto';
 import { JwtService } from '@nestjs/jwt';
-import { CreateVerifierDto } from './dtos/CreateVerifierDto';
-import { LoginResponseVerifierDto } from './dtos/LoginResponseVerifierDto';
-import { LoginDto } from './dtos/LoginDto';
+import { CreateVerifierDto } from './dtos/create-verifier.dto';
+import { LoginResponseVerifierDto } from './dtos/login-response-verifier.dto';
+import { LoginDto } from './dtos/login.dto';
 
 @Controller('verifiers')
 export class VerifierController {
