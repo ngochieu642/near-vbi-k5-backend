@@ -10,7 +10,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UserJwtAuthGuard } from './user.jwt-auth.guard';
 import { UserInJwt } from '../../shared/type';
 import { User } from './user.entity';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('users')
 @Controller('users')
@@ -46,10 +46,10 @@ export class UserController {
   @UseGuards(UserJwtAuthGuard)
   @Get('/:id')
   async findUser(@Req() request: Request, @Param('id') id: string) {
-    this.logger.log(request.user);
-    this.logger.log(id);
+    return id;
   }
 
+  @ApiBearerAuth('Bearer')
   @UseGuards(UserJwtAuthGuard)
   @Post('/identity-request')
   async createIdentityRequest(@Req() request: Request, @Body() body: CreateIdentityRequestDto): Promise<void> {

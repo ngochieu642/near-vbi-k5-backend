@@ -20,7 +20,7 @@ import { IdentityRequest } from './identity-request.entity';
 import { ApproveRequestDto } from './dtos/approve-request.dto';
 import { VerifierService } from '../verifiers/verifier.service';
 import { Verifier } from '../verifiers/verifier.entity';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('identity requests')
 @Controller('identity-requests')
@@ -35,12 +35,14 @@ export class IdentityRequestController {
     this.logger = new Logger(IdentityRequestController.name);
   }
 
+  @ApiBearerAuth('Bearer')
   @UseGuards(VerifierJwtAuthGuard)
   @Get('/')
   async getAllIdentityRequests(@Req() request: Request, @Query('status') status): Promise<IdentityRequest[]> {
     return this.identityRequestsService.findAllByStatus(status);
   }
 
+  @ApiBearerAuth('Bearer')
   @UseGuards(VerifierJwtAuthGuard)
   @Post('/:id/approve')
   async approvedRequest(@Req() request, @Param('id') id: string, @Body() body: ApproveRequestDto) {
