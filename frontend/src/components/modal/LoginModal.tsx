@@ -12,7 +12,8 @@ const LoginModal = () => {
         visible,
         confirmLoading,
         tabValue,
-        options
+        options,
+        isLoginVisible
     } = useLoginModal();
     const {TabPane} = Tabs;
 
@@ -29,7 +30,7 @@ const LoginModal = () => {
             </Button>
             <Modal
                 title="Authentication"
-                visible={visible}
+                visible={isLoginVisible}
                 confirmLoading={confirmLoading}
                 onCancel={handleCancel}
                 footer={null}
@@ -44,6 +45,7 @@ const LoginModal = () => {
                         value={tabValue}
                         optionType="button"
                     />
+
                 </div>
                 <Tabs activeKey={tabValue} className="staking-tabs">
                     <TabPane key="login">

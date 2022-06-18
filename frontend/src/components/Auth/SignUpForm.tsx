@@ -9,6 +9,9 @@ const SignUpForm = () => {
     const {
         onFinish,
         onReset,
+        isSuccess,
+        isLoading,
+        isError
     } = useSignUp(form);
 
     const {
@@ -97,7 +100,7 @@ const SignUpForm = () => {
                     <Button htmlType="button" onClick={onReset}>
                         Reset
                     </Button>
-                    <Button className="ml-2" type="primary" htmlType="submit">
+                    <Button loading={isLoading} className="ml-2" type="primary" htmlType="submit">
                         Submit
                     </Button>
                 </Form.Item>
