@@ -105,10 +105,16 @@ export class IdentityRequestService {
       publicKey: publicKey,
     });
 
-    await this.upsertEncryptedIdentityByUserId(identityRequest.user.id, encryptedIdentity);
+    const upsertIdentity: EncryptedIdentity = await this.upsertEncryptedIdentityByUserId(
+      identityRequest.user.id,
+      encryptedIdentity,
+    );
 
     // Return hash for identity
-    return EncryptionService.getHashObject(identity);
+    return {
+      hash: EncryptionService.getHashObject(identity),
+      encryptedDataId: upsertIdentity.id,
+    };
   }
 
   private async upsertEncryptedIdentityByUserId(
