@@ -9,6 +9,7 @@ import {
   Unique,
 } from 'typeorm';
 import { IdentityRequest } from '../identity-requests/identity-requests.entity';
+import { Identity } from '../identities/identities.entity';
 
 @Entity()
 @Unique(['username'])
@@ -24,6 +25,9 @@ export class Verifier {
 
   @OneToMany(() => IdentityRequest, (identityRequest) => identityRequest.verifier)
   identityRequests: IdentityRequest[];
+
+  @OneToMany(() => Identity, (identity) => identity.verifier)
+  identity: Identity[];
 
   @AfterInsert()
   logInsert() {}
