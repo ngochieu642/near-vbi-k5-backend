@@ -8,7 +8,7 @@ import { User } from './v1/users/user.entity';
 import { IdentityRequest } from './v1/identity-requests/identity-request.entity';
 import { Verifier } from './v1/verifiers/verifier.entity';
 import { VerifierModule } from './v1/verifiers/verifier.module';
-import { Identity } from './v1/encrypted-identities/encrypted-identity.entity';
+import { EncryptedIdentity } from './v1/encrypted-identities/encrypted-identity.entity';
 
 @Module({
   imports: [
@@ -22,7 +22,7 @@ import { Identity } from './v1/encrypted-identities/encrypted-identity.entity';
       username: 'docker',
       password: 'docker',
       database: 'identity_app',
-      entities: [User, IdentityRequest, Verifier, Identity],
+      entities: [User, IdentityRequest, Verifier, EncryptedIdentity],
       synchronize: true,
     }),
     UserModule,

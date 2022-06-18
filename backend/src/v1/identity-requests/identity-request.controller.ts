@@ -64,15 +64,7 @@ export class IdentityRequestController {
       throw new NotFoundException('Can not find request with id ' + id);
     }
 
-    const updatedRequest: IdentityRequest = await this.identityRequestsService.update(Number(id), {
-      status: body.approve,
-    });
-
-    const objectString: string = JSON.stringify(updatedRequest);
-    const encryptedData = EncryptionService.encryptData(objectString);
-
-    this.logger.log(encryptedData);
-
-    return new ApproveRequestResponseDto(EncryptionService.getHashObject(''));
+    const hash: string = await this.identityRequestsService.approveIdentityRequest(identityRequest, body, verifier);
+    return new ApproveRequestResponseDto(hash);
   }
 }

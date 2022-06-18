@@ -9,7 +9,7 @@ import {
   Unique,
 } from 'typeorm';
 import { IdentityRequest } from '../identity-requests/identity-request.entity';
-import { Identity } from '../encrypted-identities/encrypted-identity.entity';
+import { EncryptedIdentity } from '../encrypted-identities/encrypted-identity.entity';
 
 @Entity()
 @Unique(['username'])
@@ -26,8 +26,8 @@ export class Verifier {
   @OneToMany(() => IdentityRequest, (identityRequest) => identityRequest.verifier)
   identityRequests: IdentityRequest[];
 
-  @OneToMany(() => Identity, (identity) => identity.verifier)
-  identity: Identity[];
+  @OneToMany(() => EncryptedIdentity, (identity) => identity.verifier)
+  identity: EncryptedIdentity[];
 
   @AfterInsert()
   logInsert() {}

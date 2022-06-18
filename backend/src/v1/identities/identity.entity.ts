@@ -1,4 +1,4 @@
-import { IsArray, IsIn, IsISO8601, IsNotEmpty, IsString } from 'class-validator';
+import { IsArray, IsDate, IsIn, IsISO8601, IsNotEmpty, IsString } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class Identity {
@@ -11,9 +11,9 @@ export class Identity {
   @IsIn(['male', 'female'])
   gender: string;
 
-  @IsISO8601()
+  @IsDate()
   @IsNotEmpty()
-  dob: string;
+  dob: Date;
 
   @IsString()
   @IsNotEmpty()
@@ -34,5 +34,25 @@ export class Identity {
   @IsNotEmpty()
   @IsArray({ each: true })
   @Type(() => Array)
-  faceVector: string;
+  faceVector: number[][];
+
+  constructor(
+    name: string,
+    gender: string,
+    dob: Date,
+    address: string,
+    ccid: string,
+    phoneNumber: string,
+    nationality: string,
+    faceVector: number[][],
+  ) {
+    this.name = name;
+    this.gender = gender;
+    this.dob = dob;
+    this.address = address;
+    this.ccid = ccid;
+    this.phoneNumber = phoneNumber;
+    this.nationality = nationality;
+    this.faceVector = faceVector;
+  }
 }

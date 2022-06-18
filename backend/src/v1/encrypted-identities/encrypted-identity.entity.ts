@@ -4,23 +4,21 @@ import {
   AfterUpdate,
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
-  JoinColumn,
 } from 'typeorm';
-import { IsIn } from 'class-validator';
 import { User } from '../users/user.entity';
 import { Verifier } from '../verifiers/verifier.entity';
 
 @Entity()
-export class Identity {
+export class EncryptedIdentity {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  @IsIn(['user', 'verifier'])
-  encryptedBy: string;
+  publicKey: string;
 
   @Column()
   encryptedData: string;

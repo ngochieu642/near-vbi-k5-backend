@@ -1,4 +1,5 @@
 import { constants } from 'crypto';
+import { Logger } from '@nestjs/common';
 
 const fs = require('fs');
 const { publicEncrypt, privateDecrypt } = require('crypto');
@@ -10,11 +11,13 @@ interface LoadKeyResult {
 }
 
 export class EncryptionService {
+  private static logger = new Logger(EncryptionService.name);
+
   public static encryptData(data: string) {
     const { publicKey } = EncryptionService.loadKeys();
     const buffer = Buffer.from(data, 'utf-8');
 
-    console.log(Buffer.byteLength(buffer) + ' bytes');
+    EncryptionService.logger.log('Data encrypted length: ' + Buffer.byteLength(buffer) + ' bytes');
 
     const encryptedData: Buffer = publicEncrypt({ key: publicKey }, buffer);
     return encryptedData.toString('hex');

@@ -1,17 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Identity } from './encrypted-identity.entity';
+import { EncryptedIdentity } from './encrypted-identity.entity';
 
 @Injectable()
 export class EncryptedIdentityService {
-  constructor(@InjectRepository(Identity) private repo: Repository<Identity>) {}
+  constructor(@InjectRepository(EncryptedIdentity) private repo: Repository<EncryptedIdentity>) {}
 
-  findOne(id: number): Promise<Identity> {
+  findOne(id: number): Promise<EncryptedIdentity> {
     return this.repo.findOne({ where: { id: id } });
   }
 
-  async update(id: number, attrs: Partial<Identity>) {
+  async update(id: number, attrs: Partial<EncryptedIdentity>) {
     const user = await this.findOne(id);
 
     if (!user) {
@@ -22,7 +22,7 @@ export class EncryptedIdentityService {
     await this.repo.save(user);
   }
 
-  async remove(id: number): Promise<Identity> {
+  async remove(id: number): Promise<EncryptedIdentity> {
     const identity = await this.findOne(id);
     if (!identity) {
       throw new Error('Identity not found');

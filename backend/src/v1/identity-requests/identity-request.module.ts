@@ -7,9 +7,10 @@ import { VerifierJwtStrategy } from '../verifiers/verifier.jwt-strategy';
 import { VerifierModule } from '../verifiers/verifier.module';
 import { VerifierService } from '../verifiers/verifier.service';
 import { Verifier } from '../verifiers/verifier.entity';
+import { EncryptedIdentity } from '../encrypted-identities/encrypted-identity.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([IdentityRequest, Verifier]), VerifierModule],
+  imports: [TypeOrmModule.forFeature([IdentityRequest, Verifier, EncryptedIdentity]), VerifierModule],
   controllers: [IdentityRequestController],
   providers: [IdentityRequestService, VerifierJwtStrategy, VerifierService],
   exports: [IdentityRequestService],
