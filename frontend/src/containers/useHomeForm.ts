@@ -8,12 +8,6 @@ export const useHomeForm = (form: FormInstance) => {
         {label: 'Other', value: 'other'}
     ];
 
-    const phone_options = [
-        {label: '+86', value: '86'},
-        {label: '+87', value: '87'},
-    ];
-
-
 
     const isDisableSubmit = () => {
         return !wallet.isSignedIn();
@@ -37,35 +31,11 @@ export const useHomeForm = (form: FormInstance) => {
     };
 
 
-    const onGenderChange = (value: string) => {
-        switch (value) {
-            case 'male':
-                form.setFieldsValue({
-                    note: 'Hi, man!',
-                });
-                return;
-
-            case 'female':
-                form.setFieldsValue({
-                    note: 'Hi, lady!',
-                });
-                return;
-
-            case 'other':
-                form.setFieldsValue({
-                    note: 'Hi there!',
-                });
-        }
-    };
-
-
     return {
         onFill,
         onReset,
         onFinish,
-        onGenderChange,
         sex_options,
-        phone_options,
         isDisableSubmit,
     }
 }

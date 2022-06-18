@@ -47,7 +47,7 @@
     "@svgr/parcel-plugin-svgr": "^5.5.0",
     "@tailwindcss/postcss7-compat": "^2.2.17",
     "@types/big.js": "^6.1.2",
-    "antd": "^4.18.9",
+    "antd": "4.18.9",
     "autoprefixer": "^9.8.8",
     "axios": "^0.21.1",
     "big-integer": "^1.6.51",

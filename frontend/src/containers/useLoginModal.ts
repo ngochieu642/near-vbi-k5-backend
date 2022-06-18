@@ -2,7 +2,7 @@ import {useMutation} from 'react-query'
 import {company_login, user_login, verifier_login} from '~services'
 import {useSelector, useDispatch} from 'react-redux'
 import {RootState} from '~store/store'
-import {setCurrentTab, setIsLogin, setIsLoginVisible, setRole} from '~store/commonSlice'
+import {setCurrentTab, setIsLogin, setIsLoginVisible, setRole, setUserInfo} from '~store/commonSlice'
 import {NotificationType} from '~common/enum/notification'
 import {useHelper} from '~containers/useHelper'
 import {AUTHEN_TAB, ROLE} from '~common/enum/login'
@@ -17,6 +17,7 @@ export const useLoginModal = () => {
     const isLoginVisible = useSelector((state: RootState) => state.common.isLoginVisible)
     const currentTab = useSelector((state: RootState) => state.common.currentTab)
     const role = useSelector((state: RootState) => state.common.role)
+    const isLogin = useSelector((state: RootState) => state.common.isLogin)
     const dispatch = useDispatch()
     const options = [
         {label: 'Login', value: AUTHEN_TAB.Login},
@@ -33,20 +34,17 @@ export const useLoginModal = () => {
         async (user_info) => {
             switch (role) {
                 case ROLE.Customer:
-                    await user_login(user_info);
-                    break;
+                    return await user_login(user_info);
                 case ROLE.Verifier:
-                    await verifier_login(user_info);
-                    break;
+                    return await verifier_login(user_info);
                 case ROLE.Company:
-                    await company_login(user_info);
-                    break;
+                    return await company_login(user_info);
             }
             return;
         },
         {
             onSuccess: (data, variables, context) => {
-                dispatch(setIsLogin(true));
+                dispatch(setUserInfo(data.data));
                 openNotificationWithIcon(NotificationType.SUCCESS, 'Login Success');
             },
             onError: (error, variables, context) => {
@@ -98,6 +96,7 @@ export const useLoginModal = () => {
         isLoginVisible,
         currentTab,
         roleOptions,
-        role
+        role,
+        isLogin
     }
 }

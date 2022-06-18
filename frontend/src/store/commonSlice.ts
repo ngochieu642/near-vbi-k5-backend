@@ -7,7 +7,9 @@ export const commonSlice = createSlice({
         isLogin: false,
         isLoginVisible: false,
         currentTab: AUTHEN_TAB.Login,
-        role: ROLE.Customer
+        role: ROLE.Customer,
+        token: '',
+        userId: ''
     },
     reducers: {
         setIsLoginVisible: (state, action) => {
@@ -22,11 +24,17 @@ export const commonSlice = createSlice({
         setRole: (state, action) => {
             state.role = action.payload
         },
+        setUserInfo: (state, action) => {
+            const {accessToken, userId} = action.payload;
+            state.token = accessToken;
+            state.userId = userId;
+            state.isLogin = true;
+        },
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { setIsLoginVisible, setCurrentTab, setRole, setIsLogin} = commonSlice.actions;
+export const { setIsLoginVisible, setCurrentTab, setRole, setIsLogin, setUserInfo} = commonSlice.actions;
 
 const commonReducer = commonSlice.reducer;
 

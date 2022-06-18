@@ -23,6 +23,12 @@ function UserMenu() {
             </li>
             <li>
                 <Link
+                    className={`p-4 text-lg ${isSelected("/register") ? "border-b-2 border-greenColor text-greenColor" : "hover:border-b-2 hover:border-greenColor hover:text-greenColor"} text-gray-400 cursor-pointer`}
+                    to={"/register"}>Register
+                </Link>
+            </li>
+            <li>
+                <Link
                     className={`p-4 text-lg ${isSelected("/requests") ? "border-b-2 border-greenColor text-greenColor" : "hover:border-b-2 hover:border-greenColor hover:text-greenColor"} text-gray-400 cursor-pointer`}
                     to={"/requests"}>Requests</Link>
             </li>

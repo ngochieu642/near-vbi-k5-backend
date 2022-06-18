@@ -8,6 +8,7 @@ import WrapNearPage from "~pages/WrapNearPage";
 import HomePage from '~pages/HomePage';
 import RequestPage from '~pages/RequestPage'
 import CertificatesPage from '~pages/CertificatesPage'
+import WelcomePage from '~components/Home/Welcome'
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
         <MainLayout>
             <div className="relative pb-24 overflow-x-hidden xs:flex xs:flex-col md:flex md:flex-col">
                 <Switch>
-                    <Route path="/" exact component={AutoHeight(HomePage)} />
+                    <Route path="/" exact component={AutoHeight(WelcomePage)} />
+                    <Route path="/register" exact component={AutoHeight(HomePage)} />
                     <Route path="/requests" exact component={AutoHeight(RequestPage)} />
                     <Route path="/certificates" component={AutoHeight(CertificatesPage)} />
                     <Route path="/staking" component={AutoHeight(StakingPage)} />
