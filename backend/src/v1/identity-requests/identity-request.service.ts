@@ -47,7 +47,7 @@ export class IdentityRequestService {
   }
 
   async findById(id: number): Promise<IdentityRequest | null> {
-    return this.identityRequestRepository.findOne({ where: { id: id } });
+    return this.identityRequestRepository.findOne({ where: { id: id }, relations: ['user'] });
   }
 
   async update(id: number, attrs: Partial<IdentityRequest>): Promise<IdentityRequest> {
@@ -97,7 +97,7 @@ export class IdentityRequestService {
 
     const { publicKey } = EncryptionService.loadKeys();
 
-    //
+    // Save encrypted data
     const encryptedIdentity = this.encryptedIdentityRepository.create({
       encryptedData: encryptedData,
       user: identityRequest.user,
