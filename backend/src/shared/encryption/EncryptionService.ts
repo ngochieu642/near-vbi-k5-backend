@@ -1,3 +1,5 @@
+import { constants } from 'crypto';
+
 const fs = require('fs');
 const { publicEncrypt, privateDecrypt } = require('crypto');
 const hash = require('object-hash');
@@ -7,18 +9,25 @@ interface LoadKeyResult {
   privateKey: string;
 }
 
-export class Encryption {
+export class EncryptionService {
   public static encryptData(data: string) {
-    const { publicKey } = Encryption.loadKeys();
+    const { publicKey } = EncryptionService.loadKeys();
+    const buffer = Buffer.from(data, 'utf-8');
 
-    const encryptedData: Buffer = publicEncrypt(publicKey, Buffer.from(data));
+    console.log(Buffer.byteLength(buffer) + ' bytes');
+
+    const encryptedData: Buffer = publicEncrypt({ key: publicKey }, buffer);
     return encryptedData.toString('hex');
   }
 
   public static decryptData(encryptedData: string) {
-    const { privateKey } = Encryption.loadKeys();
+    const { privateKey } = EncryptionService.loadKeys();
 
-    const decryptedData = privateDecrypt(privateKey, Buffer.from(encryptedData, 'hex'));
+    const decryptedData = privateDecrypt({
+      key: privateKey,
+      buffer: Buffer.from(encryptedData, 'hex'),
+      padding: constants.RSA_NO_PADDING,
+    });
     return decryptedData.toString('utf-8');
   }
 
@@ -27,10 +36,10 @@ export class Encryption {
   }
 
   public static loadKeys(): LoadKeyResult {
-    const publicKey = fs.readFileSync('pub1.pem', {
+    const publicKey = fs.readFileSync(`./src/shared/encryption/pub1.pem`, {
       encoding: 'utf8',
     });
-    const privateKey = fs.readFileSync('.pvt1.pem', {
+    const privateKey = fs.readFileSync(`./src/shared/encryption/pvt1.pem`, {
       encoding: 'utf8',
     });
 

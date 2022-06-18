@@ -21,6 +21,7 @@ import { ApproveRequestDto } from './dtos/approve-request.dto';
 import { VerifierService } from '../verifiers/verifier.service';
 import { Verifier } from '../verifiers/verifier.entity';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { EncryptionService } from '../../shared/encryption/EncryptionService';
 
 @ApiTags('identity requests')
 @Controller('identity-requests')
@@ -58,7 +59,15 @@ export class IdentityRequestController {
       throw new NotFoundException('Can not find request with id ' + id);
     }
 
-    const updatedRequest = this.identityRequestsService.update(Number(id), { status: body.approve });
-    return updatedRequest;
+    const updatedRequest: IdentityRequest = await this.identityRequestsService.update(Number(id), {
+      status: body.approve,
+    });
+
+    const objectString: string = JSON.stringify(updatedRequest);
+    const encryptedData = EncryptionService.encryptData(objectString);
+
+    this.logger.log(encryptedData);
+
+    return encryptedData;
   }
 }
