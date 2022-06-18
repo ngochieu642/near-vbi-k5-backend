@@ -21,6 +21,8 @@ import { ApproveRequestDto } from './dtos/approve-request.dto';
 import { VerifierService } from '../verifiers/verifier.service';
 import { Verifier } from '../verifiers/verifier.entity';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { EncryptionService } from '../../shared/encryption/EncryptionService';
+import { ApproveRequestResponseDto } from './dtos/approve-request.response.dto';
 
 @ApiTags('identity requests')
 @Controller('identity-requests')
@@ -45,7 +47,11 @@ export class IdentityRequestController {
   @ApiBearerAuth('Bearer')
   @UseGuards(VerifierJwtAuthGuard)
   @Post('/:id/approve')
-  async approvedRequest(@Req() request, @Param('id') id: string, @Body() body: ApproveRequestDto) {
+  async approvedRequest(
+    @Req() request,
+    @Param('id') id: string,
+    @Body() body: ApproveRequestDto,
+  ): Promise<ApproveRequestResponseDto> {
     const verifier: Verifier | null = await this.verifierService.findByUsername(request.user.username);
 
     if (verifier === null) {
@@ -58,7 +64,7 @@ export class IdentityRequestController {
       throw new NotFoundException('Can not find request with id ' + id);
     }
 
-    const updatedRequest = this.identityRequestsService.update(Number(id), { status: body.approve });
-    return updatedRequest;
+    const hash: string = await this.identityRequestsService.approveIdentityRequest(identityRequest, body, verifier);
+    return new ApproveRequestResponseDto(hash);
   }
 }

@@ -1,43 +1,58 @@
-import {
-  AfterInsert,
-  AfterRemove,
-  AfterUpdate,
-  Column,
-  Entity,
-  ManyToOne,
-  OneToOne,
-  PrimaryGeneratedColumn,
-  JoinColumn,
-} from 'typeorm';
-import { IsIn } from 'class-validator';
-import { User } from '../users/user.entity';
-import { Verifier } from '../verifiers/verifier.entity';
+import { IsArray, IsDate, IsIn, IsISO8601, IsNotEmpty, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
 
-@Entity()
 export class Identity {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @IsString()
+  @IsNotEmpty()
+  name: string;
 
-  @Column()
-  @IsIn(['user', 'verifier'])
-  encryptedBy: string;
+  @IsString()
+  @IsNotEmpty()
+  @IsIn(['male', 'female'])
+  gender: string;
 
-  @Column()
-  encryptedData: string;
+  @IsDate()
+  @IsNotEmpty()
+  dob: Date;
 
-  @OneToOne(() => User)
-  @JoinColumn()
-  user: User;
+  @IsString()
+  @IsNotEmpty()
+  address: string;
 
-  @ManyToOne(() => Verifier, (verifier) => verifier.identity)
-  verifier: Verifier;
+  @IsString()
+  @IsNotEmpty()
+  ccid: string;
 
-  @AfterInsert()
-  logInsert() {}
+  @IsString()
+  @IsNotEmpty()
+  phoneNumber: string;
 
-  @AfterUpdate()
-  logUpdate() {}
+  @IsString()
+  @IsNotEmpty()
+  nationality: string;
 
-  @AfterRemove()
-  logRemove() {}
+  @IsNotEmpty()
+  @IsArray({ each: true })
+  @Type(() => Array)
+  faceVector: number[][];
+
+  constructor(
+    name: string,
+    gender: string,
+    dob: Date,
+    address: string,
+    ccid: string,
+    phoneNumber: string,
+    nationality: string,
+    faceVector: number[][],
+  ) {
+    this.name = name;
+    this.gender = gender;
+    this.dob = dob;
+    this.address = address;
+    this.ccid = ccid;
+    this.phoneNumber = phoneNumber;
+    this.nationality = nationality;
+    this.faceVector = faceVector;
+  }
 }

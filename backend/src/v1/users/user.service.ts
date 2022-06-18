@@ -32,7 +32,7 @@ export class UserService {
     }
 
     Object.assign(user, attrs);
-    this.repo.save(user);
+    await this.repo.save(user);
   }
 
   async remove(id: number): Promise<User> {

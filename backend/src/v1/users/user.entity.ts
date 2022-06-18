@@ -5,10 +5,12 @@ import {
   Column,
   Entity,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
 import { IdentityRequest } from '../identity-requests/identity-request.entity';
+import { EncryptedIdentity } from '../encrypted-identities/encrypted-identity.entity';
 
 @Entity()
 @Unique(['email'])
@@ -28,6 +30,9 @@ export class User {
 
   @OneToMany(() => IdentityRequest, (identityRequest) => identityRequest.user)
   identityRequests: IdentityRequest[];
+
+  @OneToOne(() => EncryptedIdentity, (identity) => identity.user) // specify inverse side as a second parameter
+  encryptedIdentity: EncryptedIdentity;
 
   @AfterInsert()
   logInsert() {
