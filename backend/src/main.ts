@@ -3,6 +3,7 @@ import { INestApplication, Logger, ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { V1Constants } from './v1/V1Constants';
 import { AllExceptionsFilter } from './framework-utils/all-exceptions.filter';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 const logger = new Logger('main');
 
@@ -17,6 +18,16 @@ export function appExtensions(app: INestApplication) {
   // Filters
   const httpAdapter = app.get<HttpAdapterHost>(HttpAdapterHost);
   app.useGlobalFilters(new AllExceptionsFilter(httpAdapter));
+
+  // Swaggers
+  const config = new DocumentBuilder()
+    .setTitle('Identity App')
+    .setDescription('Blockchain Identity App')
+    .setVersion('1.0')
+    .addTag('blockchain')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('swagger-ui', app, document);
 }
 
 async function bootstrap() {
