@@ -33,13 +33,13 @@ export class UserController {
 
   @Post('/login')
   async login(@Body() body: LoginDto): Promise<LoginResponseDto> {
-    const validUser = await this.userService.validateUser(body.email, body.password);
+    const validUser = await this.userService.validateUser(body.username, body.password);
 
     if (!validUser) {
       throw new UnauthorizedException();
     }
 
-    const token = this.jwtService.sign({ email: body.email, user: validUser.id });
+    const token = this.jwtService.sign({ email: body.username, user: validUser.id });
     return new LoginResponseDto(token, validUser.id);
   }
 
