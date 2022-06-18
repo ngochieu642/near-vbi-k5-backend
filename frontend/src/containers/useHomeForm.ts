@@ -13,13 +13,7 @@ export const useHomeForm = (form: FormInstance) => {
         {label: '+87', value: '87'},
     ];
 
-    type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
-    const openNotificationWithIcon = (type: NotificationType, message: String = "") => {
-        notification[type]({
-            message
-        });
-    };
 
     const isDisableSubmit = () => {
         return !wallet.isSignedIn();
@@ -72,6 +66,6 @@ export const useHomeForm = (form: FormInstance) => {
         onGenderChange,
         sex_options,
         phone_options,
-        isDisableSubmit
+        isDisableSubmit,
     }
 }

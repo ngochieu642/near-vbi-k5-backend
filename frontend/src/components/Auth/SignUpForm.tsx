@@ -9,6 +9,9 @@ const SignUpForm = () => {
     const {
         onFinish,
         onReset,
+        isSuccess,
+        isLoading,
+        isError
     } = useSignUp(form);
 
     const {
@@ -24,11 +27,14 @@ const SignUpForm = () => {
         <>
             <Form {...formItemLayout} form={form} name="control-hooks" onFinish={onFinish}
                   validateMessages={validateMessages}>
-                <Form.Item name={['user', 'name']} label="Name" rules={[{required: true}]}>
+                <Form.Item
+                    name="username"
+                    label="Name"
+                    rules={[{required: true}]}>
                     <Input/>
                 </Form.Item>
                 <Form.Item
-                    name={['user', 'email']}
+                    name="email"
                     label="Email"
                     rules={[
                         {
@@ -41,7 +47,7 @@ const SignUpForm = () => {
                     <Input/>
                 </Form.Item>
                 <Form.Item
-                    name={['user', 'password']}
+                    name="password"
                     label="Password"
                     rules={[
                         {
@@ -65,7 +71,7 @@ const SignUpForm = () => {
                         },
                         ({getFieldValue}) => ({
                             validator(_, value) {
-                                if (!value || getFieldValue(['user', 'password']) === value) {
+                                if (!value || getFieldValue('password') === value) {
                                     return Promise.resolve();
                                 }
                                 return Promise.reject(new Error('The two passwords that you entered do not match!'));
@@ -94,7 +100,7 @@ const SignUpForm = () => {
                     <Button htmlType="button" onClick={onReset}>
                         Reset
                     </Button>
-                    <Button className="ml-2" type="primary" htmlType="submit">
+                    <Button loading={isLoading} className="ml-2" type="primary" htmlType="submit">
                         Submit
                     </Button>
                 </Form.Item>
