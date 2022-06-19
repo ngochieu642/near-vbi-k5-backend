@@ -27,6 +27,9 @@ COPY package*.json ./
 
 RUN npm install --only=production
 
+# PEM IN HERE
+COPY . .
+
 COPY --from=development /app/dist ./dist
 
 CMD ["node", "dist/main"]
