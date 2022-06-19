@@ -1,6 +1,5 @@
 import { Body, Controller, Logger, Post, UnauthorizedException } from '@nestjs/common';
 import { VerifierService } from './verifier.service';
-import { LoginResponseDto } from '../users/dtos/login-response.dto';
 import { JwtService } from '@nestjs/jwt';
 import { CreateVerifierDto } from './dtos/create-verifier.dto';
 import { LoginResponseVerifierDto } from './dtos/login-response-verifier.dto';
@@ -30,6 +29,6 @@ export class VerifierController {
     }
 
     const token = this.jwtService.sign({ id: validVerifier.id, username: validVerifier.username });
-    return new LoginResponseDto(token, validVerifier.id);
+    return new LoginResponseVerifierDto(token, validVerifier.id);
   }
 }
