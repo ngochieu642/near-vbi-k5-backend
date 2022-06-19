@@ -1,5 +1,23 @@
 version: "3"
 services:
+  backend:
+    container_name: near-vbi-k5-backend
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+    ports:
+      - "30000:3000"
+    networks:
+      - dev-network
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"
+        max-size: "1k"
+
   db:
     image: postgres:14.3
     container_name: near-vbi-k5-db
@@ -12,6 +30,8 @@ services:
       - "${PWD}/sql:/docker-entrypoint-initdb.d"
     ports:
       - "54320:5432"
+    networks:
+      - dev-network
     logging:
       driver: "json-file"
       options:
@@ -22,7 +42,7 @@ services:
     image: adminer:4.8.1-standalone
     container_name: near-vbi-k5-adminer
     ports:
-      - 8080:8080
+      - "8080:8080"
     logging:
       driver: "json-file"
       options:
@@ -32,3 +52,7 @@ services:
 volumes:
   near-postgres-volume:
     driver: local
+
+networks:
+  dev-network:
+    driver: bridge
