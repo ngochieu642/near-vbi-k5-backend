@@ -22,7 +22,7 @@ export const useRequestPage = () => {
         {
             onSuccess: async (data, variables, context) => {
                 console.log(data);
-                await kyc(data.encryptedDataId, data.hash)
+                await kyc(data.encryptedDataId + "", data.hash)
             },
             onError: (error, variables, context) => {
                 // An error happened!
