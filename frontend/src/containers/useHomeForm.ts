@@ -40,10 +40,11 @@ export const useHomeForm = (form: FormInstance) => {
 
 
     const onFinish = (values: any) => {
+        const user_id = userId +"";
         const payload = {
             ...values,
-            userId,
-            dob: '18/11/1992',
+            userId: user_id,
+            dob: new Date().toISOString(),
             faceVector: [
                 [1, 2],
                 [3, 4]
