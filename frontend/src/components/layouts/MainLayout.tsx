@@ -17,23 +17,18 @@ import {
     DollarOutlined
 } from '@ant-design/icons';
 import LoginModal from '~components/modal/LoginModal'
+import {RootState} from '~store/store'
+import {useSelector} from 'react-redux'
+import {ROLE} from '~common/enum/login'
+import {MainMenu} from '~components/layouts/MainMenu'
 
 const {Header, Content, Footer} = Layout;
 
 const MainLayout = (props: any) => {
     const location = useLocation();
     const history = useHistory();
-    const isSelected = (pattern: string) => {
-        return matchPath(location.pathname, {exact: true, strict: false, path: pattern})
-    };
 
-    const menu = (
-        <Menu className={"p-2 rounded"}>
-            <Menu.Item onClick={() => logout()} key="logout" icon={<LogoutOutlined/>}>
-                Logout
-            </Menu.Item>
-        </Menu>
-    );
+    const isLogin = useSelector((state: RootState) => state.common.isLogin)
 
     return (
         <div>
@@ -47,41 +42,13 @@ const MainLayout = (props: any) => {
                         </Link>
                     </div>
                     <div className={"flex-1 xs:hidden sm:hidden md:hidden"}>
-                        <ul className={"flex flex-row justify-center items-center mb-0"}>
-                            <li>
-                                <Link
-                                    className={`p-4 text-lg ${isSelected("/") ? "border-b-2 border-greenColor text-greenColor" : "hover:border-b-2 hover:border-greenColor hover:text-greenColor"} text-gray-400 cursor-pointer`}
-                                    to={"/"}>Home
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    className={`p-4 text-lg ${isSelected("/requests") ? "border-b-2 border-greenColor text-greenColor" : "hover:border-b-2 hover:border-greenColor hover:text-greenColor"} text-gray-400 cursor-pointer`}
-                                    to={"/requests"}>Requests</Link>
-                            </li>
-                            <li>
-                                <Link
-                                    className={`p-4 text-lg ${isSelected("/Certificates") ? "border-b-2 border-greenColor text-greenColor" : "hover:border-b-2 hover:border-greenColor hover:text-greenColor"} text-gray-400 cursor-pointer`}
-                                    to={"/certificates"}>Certificates</Link>
-                            </li>
-                            {/*<li>*/}
-                            {/*    /!*<Link className={`p-4 text-lg ${isSelected("/pools") ? "border-b-2 border-greenColor text-greenColor" : "hover:border-b-2 hover:border-greenColor hover:text-greenColor"} text-gray-400 cursor-pointer`} to={"/pools"}>Pools</Link>*!/*/}
-                            {/*</li>*/}
-                            <li>
-                                <Link
-                                    className={`p-4 text-lg ${isSelected("/staking") ? "border-b-2 border-greenColor text-greenColor" : "hover:border-b-2 hover:border-greenColor hover:text-greenColor"} text-gray-400 cursor-pointer`}
-                                    to={"/staking"}>Staking</Link>
-                            </li>
-                            <li>
-                                <Link
-                                    className={`p-4 text-lg ${isSelected("/faucet") ? "border-b-2 border-greenColor text-greenColor" : "hover:border-b-2 hover:border-greenColor hover:text-greenColor"} text-gray-400 cursor-pointer`}
-                                    to={"/faucet"}>Faucet</Link>
-                            </li>
-
-                            {/*<li>*/}
-                            {/*    <Link className={`p-4 text-lg ${isSelected("/wrap-near") ? "border-b-2 border-greenColor text-greenColor" : "hover:border-b-2 hover:border-greenColor hover:text-greenColor"} text-gray-400 cursor-pointer`} to={"/wrap-near"}>Wrap NEAR</Link>*/}
-                            {/*</li>*/}
-                        </ul>
+                        {isLogin ?
+                            <>
+                                <MainMenu/>
+                            </>
+                            :
+                            <span></span>
+                        }
                     </div>
                     <div className={"xs:flex-1 sm:flex-1 md:flex-1 flex justify-end items-center"} style={{width: 140}}>
                         <LoginModal/>

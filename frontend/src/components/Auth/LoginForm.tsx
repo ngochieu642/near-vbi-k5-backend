@@ -1,34 +1,43 @@
-import {Button, Checkbox, Form, Input, Modal} from 'antd';
+import {Button, Checkbox, Form, Input, Modal, Select} from 'antd';
 import React, {useState} from 'react';
 import {useLoginModal} from '~containers/useLoginModal'
 import {UserOutlined, LockOutlined} from '@ant-design/icons'
+import {ROLE} from '~common/enum/login'
+import { Radio } from 'antd';
+
 
 const LoginForm = () => {
     const [form] = Form.useForm();
 
     const {
         onFinish,
+        handleRoleChange,
+        roleOptions
     } = useLoginModal();
     return (
         <>
             <Form
                 name="normal_login"
                 className="login-form"
-                initialValues={{remember: true}}
+                initialValues={{role: ROLE.Customer}}
                 onFinish={onFinish}
                 form={form}
             >
+                <Form.Item name="role" rules={[{required: true}]}>
+                    <Radio.Group
+                        options={roleOptions}
+                        onChange={handleRoleChange}
+                    >
+                    </Radio.Group>
+                </Form.Item>
                 <Form.Item
-                    name="email"
+                    name="username"
                     rules={[
-                        {
-                            type: 'email',
-                        },
                         {
                             required: true,
                         },
                     ]}>
-                    <Input prefix={<UserOutlined className="site-form-item-icon"/>} placeholder="Email"/>
+                    <Input prefix={<UserOutlined className="site-form-item-icon"/>} placeholder="Username"/>
                 </Form.Item>
                 <Form.Item
                     name="password"

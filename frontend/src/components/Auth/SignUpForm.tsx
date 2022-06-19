@@ -3,6 +3,8 @@ import React, {useState} from 'react';
 import {useSignUp} from '~containers/useSignUp';
 import {useValidateMessages} from '~containers/useValidateMessages'
 import {useLayout} from '~containers/useLayout'
+import { Radio } from 'antd';
+import {useLoginModal} from '~containers/useLoginModal'
 
 const SignUpForm = () => {
     const [form] = Form.useForm();
@@ -13,6 +15,8 @@ const SignUpForm = () => {
         isLoading,
         isError
     } = useSignUp(form);
+
+    const { roleOptions, handleRoleChange } = useLoginModal();
 
     const {
         validateMessages
@@ -27,6 +31,13 @@ const SignUpForm = () => {
         <>
             <Form {...formItemLayout} form={form} name="control-hooks" onFinish={onFinish}
                   validateMessages={validateMessages}>
+                <Form.Item label="Role" name="role" rules={[{required: true}]}>
+                    <Radio.Group
+                        options={roleOptions}
+                        onChange={handleRoleChange}
+                    >
+                    </Radio.Group>
+                </Form.Item>
                 <Form.Item
                     name="username"
                     label="Name"
