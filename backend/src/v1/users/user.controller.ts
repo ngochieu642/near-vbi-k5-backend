@@ -1,4 +1,15 @@
-import { Body, Controller, Get, Logger, Param, Post, UnauthorizedException, UseGuards, Req } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Logger,
+  Param,
+  Post,
+  UnauthorizedException,
+  UseGuards,
+  Req,
+  Inject,
+} from '@nestjs/common';
 import { Request } from 'express';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UserService } from './user.service';
@@ -20,7 +31,7 @@ export class UserController {
   constructor(
     private userService: UserService,
     private identityRequestService: IdentityRequestService,
-    private jwtService: JwtService,
+    @Inject('JwtSecretUserService') private jwtService: JwtService,
   ) {
     this.logger = new Logger(UserController.name);
   }
@@ -39,7 +50,7 @@ export class UserController {
       throw new UnauthorizedException();
     }
 
-    const token = this.jwtService.sign({ email: body.username, user: validUser.id });
+    const token = this.jwtService.sign({ username: body.username, id: validUser.id });
     return new LoginResponseDto(token, validUser.id, validUser.username);
   }
 
@@ -49,12 +60,9 @@ export class UserController {
     return id;
   }
 
-  @ApiBearerAuth('Bearer')
-  @UseGuards(UserJwtAuthGuard)
   @Post('/identity-request')
   async createIdentityRequest(@Req() request: Request, @Body() body: CreateIdentityRequestDto): Promise<void> {
-    const userInJwt: UserInJwt = request.user as UserInJwt; // See JwtStrategy
-    const user: User = await this.userService.findOne(userInJwt.id);
+    const user: User = await this.userService.findOne(Number(body.userId));
 
     if (!user) {
       throw new UnauthorizedException();

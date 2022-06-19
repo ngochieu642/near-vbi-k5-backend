@@ -24,15 +24,10 @@ export class IdentityRequestService {
 
   createFromRequestDto(dto: CreateIdentityRequestDto, user: User): Promise<IdentityRequest> {
     const partialProperty: DeepPartial<IdentityRequest> = {
-      accountId: dto.accountId,
-      userPublicKey: dto.userPublicKey,
       name: dto.name,
       gender: dto.gender,
       dob: new Date(dto.dob),
-      address: dto.address,
       ccid: dto.ccid,
-      phoneNumber: dto.phoneNumber,
-      nationality: dto.nationality,
       faceVector: dto.faceVector,
       status: 'pending',
       user: user,
@@ -43,7 +38,10 @@ export class IdentityRequestService {
   }
 
   async findAllByStatus(status = 'pending'): Promise<IdentityRequest[]> {
-    return this.identityRequestRepository.find({ where: { status: status as IdentityRequestStatus } });
+    return this.identityRequestRepository.find({
+      where: { status: status as IdentityRequestStatus },
+      relations: ['user'],
+    });
   }
 
   async findById(id: number): Promise<IdentityRequest | null> {
@@ -83,10 +81,7 @@ export class IdentityRequestService {
       identityRequest.name,
       identityRequest.gender,
       identityRequest.dob,
-      identityRequest.address,
       identityRequest.ccid,
-      identityRequest.phoneNumber,
-      identityRequest.nationality,
       JSON.parse(JSON.stringify(identityRequest.faceVector)),
     );
 
