@@ -1,23 +1,21 @@
-import { Avatar, Button, List, Skeleton } from 'antd';
-import React, { useEffect, useState } from 'react';
+import {Avatar, Button, List, Skeleton} from 'antd';
+import React, {useEffect, useState} from 'react';
 import {useRequestPage} from '~containers/useRequestPage'
+import {useQuery} from 'react-query'
+import {verifier_get_request} from '~services'
+import moment from 'moment'
 
 const RequestPage = () => {
     const {
-        initLoading,
-        loading,
-        list,
-        fetchData,
-        onLoadMore
+        handleApprove,
+        handleReject
+
     } = useRequestPage();
 
-
-    useEffect(() => {
-        fetchData()
-    }, []);
+    const {data, error, isError, isLoading} = useQuery('requests', verifier_get_request)
 
     const loadMore =
-        !initLoading && !loading ? (
+        isLoading ? (
             <div
                 style={{
                     textAlign: 'center',
@@ -26,7 +24,6 @@ const RequestPage = () => {
                     lineHeight: '32px',
                 }}
             >
-                <Button onClick={onLoadMore}>loading more</Button>
             </div>
         ) : null;
     return (
@@ -39,22 +36,23 @@ const RequestPage = () => {
             <div className={"bg-cardBg rounded-2xl p-5 mb-2 mt-5"}>
                 <List
                     className="demo-loadmore-list"
-                    loading={initLoading}
+                    loading={isLoading}
                     itemLayout="horizontal"
                     loadMore={loadMore}
-                    dataSource={list}
-                    renderItem={(item) => (
+                    dataSource={data}
+                    renderItem={({id, name, gender, dob, ccid}) => (
                         <List.Item
-                            actions={[<a key="list-loadmore-edit">edit</a>, <a key="list-loadmore-more">more</a>]}
                         >
-                            <Skeleton avatar title={false} loading={item.loading} active>
-                                <List.Item.Meta
-                                    avatar={<Avatar src={item.picture.large} />}
-                                    title={<a href="https://ant.design">{item.name?.last}</a>}
-                                    description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-                                />
-                                <div>content</div>
-                            </Skeleton>
+                            <List.Item.Meta
+                                title={<a href="">{name}</a>}
+                                description={ccid}
+                            />
+                            <div className="mr-5">
+                                <p>Gender: {gender} </p>
+                                <p>DOB: {moment(dob).format('YYYY/MM/DD')} </p>
+                            </div>
+                            <Button onClick={(event) => handleReject(id)}>Reject</Button>
+                            <Button onClick={(event) => handleApprove(id)} type="primary">Approve</Button>
                         </List.Item>
                     )}
                 />

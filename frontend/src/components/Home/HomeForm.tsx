@@ -17,40 +17,30 @@ const HomeForm: React.FC = () => {
 
     return (
         <Form {...layout_8_16} form={form} name="control-hooks" onFinish={onFinish}>
-            <Form.Item name={['user', 'name']} label="Name" rules={[{required: true}]}>
+            <Form.Item name={'name'} label="Name" rules={[{required: true}]}>
                 <Input/>
             </Form.Item>
-            <Form.Item name={['user', 'gender']} label="Gender" rules={[{required: true}]}>
+            <Form.Item name={'gender'} label="Gender" rules={[{required: true}]}>
                 <Radio.Group
                     options={sex_options}
                 >
                 </Radio.Group>
             </Form.Item>
-            <Form.Item name={['user', 'email']} label="Email" rules={[{required: true, type: 'email'}]}>
-                <Input/>
-            </Form.Item>
-            <Form.Item name={['user', 'dob']} label="DatePicker" rules={[{required: true}]}>
+            <Form.Item name={'dob'} label="Birthday" rules={[{required: true}]}>
                 <DatePicker/>
             </Form.Item>
-            <Form.Item
-                name="phone"
-                label="Phone Number"
-                rules={[{required: true, message: 'Please input your phone number!'}]}
-            >
-                <Input style={{width: '100%'}}/>
-            </Form.Item>
-            <Form.Item name={['user', 'website']} label="Website">
+            <Form.Item name={'ccid'} label="CCID">
                 <Input/>
-            </Form.Item>
-            <Form.Item name={['user', 'introduction']} label="Introduction">
-                <Input.TextArea/>
             </Form.Item>
             <Form.Item {...tailFormItemLayout}>
                 <Button htmlType="button" onClick={onReset}>
                     Reset
                 </Button>
-                <Button className="ml-3" disabled={isDisableSubmit()} type="primary" htmlType="submit">
+                <Button className="ml-3 mr-3" disabled={isDisableSubmit()} type="primary" htmlType="submit">
                     Submit
+                </Button>
+                <Button htmlType="button" onClick={onFill}>
+                    Fill
                 </Button>
             </Form.Item>
         </Form>

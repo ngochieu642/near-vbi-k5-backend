@@ -2,6 +2,7 @@
 const FAUCET_CONTRACT_NAME = 'line-faucet.testnet'
 const FT_CONTRACT_NAME = 'line-token.testnet'
 const STAKING_CONTRACT_NAME = 'dev-1654171545868-56340066651726'
+const KYC_CONTRACT_NAME = 'dev-1655624955810-47042894622488'
 
 function getConfig(env: string) {
     switch (env) {
@@ -16,6 +17,7 @@ function getConfig(env: string) {
                 VBI_STAKING_CONTRACT: STAKING_CONTRACT_NAME,
                 VBI_FT_CONTRACT: FT_CONTRACT_NAME,
                 VBI_FAUCET_FT_CONTRACT: FAUCET_CONTRACT_NAME,
+                VBI_KYC_CONTRACT: KYC_CONTRACT_NAME,
                 VBI_SIMPLE_POOL_CONTRACT: 'simple-pool.vbidev.near',
                 WRAP_NEAR_CONTRACT: "wrap.near"
             }
@@ -29,6 +31,7 @@ function getConfig(env: string) {
                 VBI_STAKING_CONTRACT: STAKING_CONTRACT_NAME,
                 VBI_FT_CONTRACT: FT_CONTRACT_NAME,
                 VBI_FAUCET_FT_CONTRACT: FAUCET_CONTRACT_NAME,
+                VBI_KYC_CONTRACT: KYC_CONTRACT_NAME,
                 VBI_SIMPLE_POOL_CONTRACT: 'simple-pool.vbidev.testnet',
                 WRAP_NEAR_CONTRACT: "wrap.testnet"
             }
@@ -42,6 +45,7 @@ function getConfig(env: string) {
                 VBI_STAKING_CONTRACT: STAKING_CONTRACT_NAME,
                 VBI_FT_CONTRACT: FT_CONTRACT_NAME,
                 VBI_FAUCET_FT_CONTRACT: FAUCET_CONTRACT_NAME,
+                VBI_KYC_CONTRACT: KYC_CONTRACT_NAME,
                 VBI_SIMPLE_POOL_CONTRACT: 'simple-pool.vbidev.testnet',
                 WRAP_NEAR_CONTRACT: "wrap.testnet"
             }
