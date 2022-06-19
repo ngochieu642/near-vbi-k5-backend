@@ -28,7 +28,7 @@ const kyc = async (key: string, hash: string) => {
                     hash
                 },
                 gas: "10000000000000",
-                amount: ONE_YOCTO_NEAR
+                amount: FT_STORAGE_AMOUNT
             }
         ]
     }
