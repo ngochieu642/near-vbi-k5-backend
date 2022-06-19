@@ -26,6 +26,7 @@ export const commonSlice = createSlice({
         },
         setUserInfo: (state, action) => {
             const {accessToken, userId} = action.payload;
+            localStorage.setItem('token', accessToken);
             state.token = accessToken;
             state.userId = userId;
             state.isLogin = true;
