@@ -4,19 +4,11 @@ import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import { User } from './user.entity';
 import { IdentityRequestModule } from '../identity-requests/identity-request.module';
-import { JwtModule } from '@nestjs/jwt';
-import { ApplicationConstants } from '../../ApplicationConstants';
 import { UserJwtStrategy } from './user.jwt-strategy';
+import { JwtSecretUserModule } from './jwt-user.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([User]),
-    IdentityRequestModule,
-    JwtModule.register({
-      secret: ApplicationConstants.JWT_SECRET_USER,
-      signOptions: { expiresIn: '20h' },
-    }),
-  ],
+  imports: [TypeOrmModule.forFeature([User]), IdentityRequestModule, JwtSecretUserModule],
   controllers: [UserController],
   providers: [UserService, UserJwtStrategy],
   exports: [UserJwtStrategy],

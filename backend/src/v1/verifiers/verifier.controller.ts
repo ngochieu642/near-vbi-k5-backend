@@ -1,4 +1,4 @@
-import { Body, Controller, Logger, Post, UnauthorizedException } from '@nestjs/common';
+import { Body, Controller, Inject, Logger, Post, UnauthorizedException } from '@nestjs/common';
 import { VerifierService } from './verifier.service';
 import { JwtService } from '@nestjs/jwt';
 import { CreateVerifierDto } from './dtos/create-verifier.dto';
@@ -10,7 +10,10 @@ import { ApiTags } from '@nestjs/swagger';
 @Controller('verifiers')
 export class VerifierController {
   private logger: Logger;
-  constructor(private verifiersService: VerifierService, private jwtService: JwtService) {
+  constructor(
+    private verifiersService: VerifierService,
+    @Inject('JwtSecretVerifierService') private jwtService: JwtService,
+  ) {
     this.logger = new Logger(VerifierController.name);
   }
 
