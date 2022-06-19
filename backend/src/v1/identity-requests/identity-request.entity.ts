@@ -10,12 +10,6 @@ export class IdentityRequest {
   id: number;
 
   @Column()
-  accountId: string;
-
-  @Column()
-  userPublicKey: string;
-
-  @Column()
   name: string;
 
   @Column()
@@ -26,16 +20,7 @@ export class IdentityRequest {
   dob: Date;
 
   @Column()
-  address: string;
-
-  @Column()
   ccid: string;
-
-  @Column()
-  phoneNumber: string;
-
-  @Column()
-  nationality: Nationality;
 
   @Column({ array: true })
   faceVector: string;
