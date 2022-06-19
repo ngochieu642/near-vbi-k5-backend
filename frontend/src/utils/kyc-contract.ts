@@ -3,7 +3,7 @@ import {
     wallet,
     config,
     Transaction,
-    executeMultipleTransactions, FT_STORAGE_AMOUNT
+    executeMultipleTransactions, FT_STORAGE_AMOUNT, ONE_YOCTO_NEAR
 } from "~utils/near";
 import ftContract from "~utils/ft-contract";
 
@@ -27,6 +27,8 @@ const kyc = async (key: string, hash: string) => {
                     key,
                     hash
                 },
+                gas: "10000000000000",
+                amount: ONE_YOCTO_NEAR
             }
         ]
     }
