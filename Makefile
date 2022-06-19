@@ -6,6 +6,10 @@ dev-setup:
 dev-teardown:
 	docker-compose down -v
 
+.PHONY: deploy
+deploy:
+	docker-compose up --build -d backend db
+
 .PHONY: ssh-dev
 ssh-dev:
 	ssh -i personal-simple-shoot-server.pem ec2-user@54.254.178.184

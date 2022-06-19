@@ -17,8 +17,8 @@ import { EncryptedIdentity } from './v1/encrypted-identities/encrypted-identity.
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 54320,
+      host: 'db',
+      port: 5432,
       username: 'docker',
       password: 'docker',
       database: 'identity_app',
