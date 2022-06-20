@@ -22,3 +22,8 @@ destroy-deploy:
 ssh-dev:
 	ssh -i personal-simple-shoot-server.pem ec2-user@18.142.229.27
 
+.PHONY: copy-dist-to-remote
+copy-dist-to-remote:
+	scp -i personal-simple-shoot-server.pem -r frontend/dist ec2-user@18.142.229.27:/home/ec2-user/Projects/near-vbi-k5-backend/frontend
+
+
