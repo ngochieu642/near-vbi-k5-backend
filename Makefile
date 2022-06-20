@@ -8,7 +8,7 @@ dev-teardown:
 
 .PHONY: deploy
 deploy:
-	docker-compose up --build -d backend db
+	docker-compose up --build -d frontend backend db
 
 .PHONY: stop-deploy
 stop-deploy:
