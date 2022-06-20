@@ -20,4 +20,5 @@ $ make dev-teardown
 
 # Cloud
 
-- The stack is deployed here: TODO
+- Frontend deployed here: https://near-vbi-k5-backend.vercel.app/
+- Smart contract Id: [dev-1655624955810-47042894622488](https://explorer.testnet.near.org/accounts/dev-1655624955810-47042894622488)
