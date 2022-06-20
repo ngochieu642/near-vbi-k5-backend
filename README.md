@@ -20,6 +20,6 @@ $ make dev-teardown
 
 # Cloud
 
-- Frontend deployed here: http://54.254.178.184:8888
-- Backend OpenAPI: http://54.254.178.184:30000/swagger-ui
+- Frontend deployed here: http://18.142.229.27:8888
+- Backend OpenAPI: http://18.142.229.27:30000/swagger-ui
 - Smart contract Id: [dev-1655624955810-47042894622488](https://explorer.testnet.near.org/accounts/dev-1655624955810-47042894622488)

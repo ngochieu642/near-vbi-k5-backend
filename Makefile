@@ -20,5 +20,5 @@ destroy-deploy:
 
 .PHONY: ssh-dev
 ssh-dev:
-	ssh -i personal-simple-shoot-server.pem ec2-user@54.254.178.184
+	ssh -i personal-simple-shoot-server.pem ec2-user@18.142.229.27
 
